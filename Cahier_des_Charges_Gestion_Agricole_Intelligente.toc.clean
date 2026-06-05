@@ -1,0 +1,82 @@
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Contexte}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Problématique}{1}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Objectif Général}{2}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Objectifs Spécifiques}{2}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Méthodologie Adoptée}{2}{section.1.5}%
+\contentsline {chapter}{\numberline {2}CHAPITRE 2 : ÉTUDE D'OPPORTUNITÉ ET JUSTIFICATION DU PROJET}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Opportunité du Projet}{3}{section.2.1}%
+\contentsline {section}{\numberline {2.2}2.2 Justification du Choix du Domaine Agricole}{3}{section.2.2}%
+\contentsline {section}{\numberline {2.3}2.3 Justification des Fonctionnalités Retenues}{4}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Suivi des cultures}{4}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Prédiction des rendements}{4}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Recommandations agronomiques}{4}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Gestion des utilisateurs}{4}{subsection.2.3.4}%
+\contentsline {section}{\numberline {2.4}2.4 Justification du Périmètre du Projet}{4}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Fonctionnalités Exclues}{4}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Faisabilité du Projet}{5}{section.2.6}%
+\contentsline {chapter}{\numberline {3}CHAPITRE 3 : PRÉSENTATION GÉNÉRALE DU SYSTÈME}{6}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Vision du Système}{6}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Utilisateurs du Système}{6}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Agriculteur}{6}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Agronome}{6}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Administrateur}{7}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}3.3 Environnement du Système}{7}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Acteurs humains}{7}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Service externe}{7}{subsection.3.3.2}%
+\contentsline {section}{\numberline {3.4}3.4 Description Générale des Services Offerts}{7}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Gestion des utilisateurs}{7}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Gestion des cultures}{7}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Suivi des cultures}{7}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}Prédiction des rendements}{8}{subsection.3.4.4}%
+\contentsline {subsection}{\numberline {3.4.5}Recommandations agronomiques}{8}{subsection.3.4.5}%
+\contentsline {subsection}{\numberline {3.4.6}Administration}{8}{subsection.3.4.6}%
+\contentsline {section}{\numberline {3.5}Limites du Système}{8}{section.3.5}%
+\contentsline {section}{\numberline {3.6}3.6 Diagramme de Contexte du Système}{8}{section.3.6}%
+\contentsline {chapter}{\numberline {4}CHAPITRE 4 : EXIGENCES FONCTIONNELLES}{9}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Introduction}{9}{section.4.1}%
+\contentsline {section}{\numberline {4.2}4.2 Gestion des Comptes Utilisateurs}{9}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Gestion des Cultures}{9}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Suivi des Cultures}{10}{section.4.4}%
+\contentsline {section}{\numberline {4.5}4.5 Prédiction des Rendements}{10}{section.4.5}%
+\contentsline {section}{\numberline {4.6}4.6 Gestion des Recommandations Agronomiques}{10}{section.4.6}%
+\contentsline {section}{\numberline {4.7}4.7 Administration du Système}{10}{section.4.7}%
+\contentsline {section}{\numberline {4.8}4.8 Priorisation des Exigences Fonctionnelles}{11}{section.4.8}%
+\contentsline {subsection}{\numberline {4.8.1}Priorité élevée}{11}{subsection.4.8.1}%
+\contentsline {subsection}{\numberline {4.8.2}Priorité moyenne}{11}{subsection.4.8.2}%
+\contentsline {subsection}{\numberline {4.8.3}Priorité faible}{11}{subsection.4.8.3}%
+\contentsline {chapter}{\numberline {5}CHAPITRE 5 : EXIGENCES NON FONCTIONNELLES}{12}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Introduction}{12}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Validité}{12}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Fiabilité}{12}{section.5.3}%
+\contentsline {section}{\numberline {5.4}5.4 Performance et Efficacité}{12}{section.5.4}%
+\contentsline {section}{\numberline {5.5}5.5 Sécurité et Intégrité}{13}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Facilité d'Utilisation}{13}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Maintenabilité}{13}{section.5.7}%
+\contentsline {section}{\numberline {5.8}Extensibilité}{13}{section.5.8}%
+\contentsline {section}{\numberline {5.9}Portabilité}{13}{section.5.9}%
+\contentsline {section}{\numberline {5.10}Compatibilité}{14}{section.5.10}%
+\contentsline {section}{\numberline {5.11}Vérifiabilité}{14}{section.5.11}%
+\contentsline {section}{\numberline {5.12}Réutilisabilité}{14}{section.5.12}%
+\contentsline {chapter}{\numberline {6}CHAPITRE 6 : RESSOURCES, CONTRAINTES ET PLANIFICATION}{15}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Ressources Humaines}{15}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Étudiant Développeur (Redacteur de ce document : Tambou et Bella)}{15}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Enseignant Encadreur}{15}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}Utilisateurs Cibles}{15}{subsection.6.1.3}%
+\contentsline {section}{\numberline {6.2}Ressources Matérielles}{16}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Ressources Logicielles}{16}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Outils de modélisation}{16}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Outils de développement}{16}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}Base de données}{16}{subsection.6.3.3}%
+\contentsline {subsection}{\numberline {6.3.4}Outils de documentation}{16}{subsection.6.3.4}%
+\contentsline {section}{\numberline {6.4}Contraintes du Projet}{16}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Contraintes Temporelles}{16}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Contraintes Académiques}{17}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}Contraintes Techniques}{17}{subsection.6.4.3}%
+\contentsline {section}{\numberline {6.5}6.5 Planification Prévisionnelle}{17}{section.6.5}%
+\contentsline {section}{\numberline {6.6}6.6 Priorisation des Fonctionnalités}{17}{section.6.6}%
+\contentsline {subsection}{\numberline {6.6.1}Priorité Critique}{17}{subsection.6.6.1}%
+\contentsline {subsection}{\numberline {6.6.2}Priorité Importante}{17}{subsection.6.6.2}%
+\contentsline {subsection}{\numberline {6.6.3}Priorité Secondaire}{18}{subsection.6.6.3}%
+\contentsline {section}{\numberline {6.7}Évolutions Futures}{18}{section.6.7}%
+\contentsline {chapter}{\numberline {7}CONCLUSION}{19}{chapter.7}%

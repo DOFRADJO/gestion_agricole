@@ -1,0 +1,1180 @@
+% Cahier des charges - Gestion Agricole Intelligente
+\documentclass[12pt,a4paper]{report}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\geometry{top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\begin{document}
+\begin{titlepage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \raggedright
+    {\small UNIVERSITÉ DE YAOUNDÉ I}\\[0.2cm]
+    {\small **********}\\[0.2cm]
+    {\small ÉCOLE NATIONALE SUPÉRIEURE POLYTECHNIQUE DE YAOUNDÉ}\\[0.2cm]
+    {\small **********}\\[0.2cm]
+    {\small DÉPARTEMENT DU GÉNIE}\\
+    {\small INFORMATIQUE}\\[0.2cm]
+    {\small **********}\\[0.2cm]
+    {\small ARTS NUMÉRIQUES}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \raggedleft
+    {\small THE UNIVERSITY OF YAOUNDE I}\\[0.2cm]
+    {\small **********}\\[0.2cm]
+    {\small NATIONAL ADVANCED SCHOOL OF ENGINEERING OF YAOUNDE}\\[0.2cm]
+    {\small **********}\\[0.2cm]
+    {\small DEPARTMENT OF COMPUTER}\\
+    {\small ENGINEERING}\\[0.2cm]
+    {\small **********}\\[0.2cm]
+    {\small DIGITAL ARTS}
+  \end{minipage}
+
+  \begin{center}
+    \includegraphics[width=0.28\textwidth]{images/logo-enspy.png}\\[1cm]
+
+    {\LARGE \textbf{Cahier des charges}}\\[0.6cm]
+    {\Huge \textbf{Analyse et Conception d'une application de gestion agricole intelligente: suivi des cultures, prédiction des rendement, recommandation agronomique}}\\[1cm]
+
+    {\large \textit{Genie Logiciel I}}\\[0.8cm]
+
+    {\large \textbf{Rédaction}}\\[0.3cm]
+    {\large Tambou Djomou Franck Donald 23P732}\\
+    {\large Kanmo Ngamini Bella Rinda 22P008}\\[0.8cm]
+
+    {\large Encadrant : Dr Kungne}\\[0.4cm]
+    {\large Date : juin 2026}\\[0.4cm]
+
+    {\small \textit{Ce document présente les objectifs, les exigences et le périmètre du projet.}}
+  \end{center}
+
+  \vfill
+  \thispagestyle{empty}
+\end{titlepage}
+\pagenumbering{roman}
+\tableofcontents
+% \listoffigures
+% \listoftables
+\clearpage
+\pagenumbering{arabic}
+\chapter{Introduction}\label{chapitre-1-introduction}
+
+\section{Contexte}\label{contexte}
+
+L'agriculture constitue l'un des secteurs les plus importants pour le
+développement économique et social de nombreux pays. Elle contribue à la
+sécurité alimentaire, à la création d'emplois et à l'approvisionnement
+des industries agroalimentaires. Cependant, les agriculteurs sont
+confrontés à plusieurs défis liés à la gestion quotidienne de leurs
+activités agricoles, notamment le suivi des cultures, l'anticipation des
+rendements et la prise de décisions techniques adaptées aux conditions
+de production.
+
+Avec l'évolution des technologies de l'information et de la
+communication, il devient possible de mettre à la disposition des
+acteurs du secteur agricole des outils numériques capables de
+centraliser les informations relatives aux cultures, d'analyser les
+données collectées et de fournir une assistance intelligente à la prise
+de décision.
+
+Dans cette perspective, le développement d'une application de gestion
+agricole intelligente représente une solution pertinente permettant
+d'améliorer le suivi des exploitations agricoles et d'optimiser les
+performances de production.
+
+Le présent projet porte sur l'analyse, la conception et l'implémentation
+d'une application de gestion agricole intelligente intégrant des
+fonctionnalités de suivi des cultures, de prédiction des rendements et
+de recommandation agronomique.
+
+\section{Problématique}\label{probluxe9matique}
+
+Dans de nombreuses exploitations agricoles, les informations relatives
+aux cultures sont encore gérées de manière manuelle ou à l'aide d'outils
+peu adaptés. Cette situation entraîne souvent des difficultés dans le
+suivi des activités agricoles, la conservation des données historiques
+et l'évaluation des performances de production.
+
+Par ailleurs, l'absence d'outils d'aide à la décision limite la capacité
+des agriculteurs à anticiper les rendements futurs et à adopter les
+meilleures pratiques agronomiques en fonction de l'évolution de leurs
+cultures.
+
+Ces insuffisances peuvent conduire à une baisse de productivité, à une
+mauvaise allocation des ressources et à une augmentation des risques
+liés à la production agricole.
+
+Face à cette situation, la question suivante se pose :
+
+\textbf{Comment concevoir une application de gestion agricole
+intelligente capable d'assurer un suivi efficace des cultures, de
+prédire les rendements agricoles et de fournir des recommandations
+agronomiques pertinentes afin d'améliorer la prise de décision des
+acteurs du secteur agricole ?}
+
+\section{Objectif Général}\label{objectif-guxe9nuxe9ral}
+
+L'objectif général de ce projet est de concevoir et de développer une
+application de gestion agricole intelligente permettant d'assurer le
+suivi des cultures, la prédiction des rendements agricoles et la
+génération de recommandations agronomiques destinées à améliorer la
+gestion des activités agricoles.
+
+\section{Objectifs Spécifiques}\label{objectifs-spuxe9cifiques}
+
+Pour atteindre cet objectif général, il est nécessaire de :
+
+\begin{itemize}
+\item
+  concevoir un système permettant l'enregistrement et la gestion des
+  informations relatives aux cultures ;
+\item
+  permettre le suivi de l'évolution des cultures à travers la saisie et
+  la consultation d'observations agricoles ;
+\item
+  mettre en place un mécanisme de prédiction des rendements agricoles à
+  partir des données enregistrées ;
+\item
+  fournir des recommandations agronomiques adaptées à l'état des
+  cultures ;
+\item
+  permettre la consultation des historiques de suivi et des prédictions
+  réalisées ;
+\item
+  assurer une gestion sécurisée des utilisateurs de la plateforme ;
+\item
+  produire une architecture logicielle facilitant la maintenance et
+  l'évolution future du système.
+\end{itemize}
+
+\section{Méthodologie Adoptée}\label{muxe9thodologie-adoptuxe9e}
+
+La réalisation de ce projet suivra les principes du génie logiciel en
+respectant les différentes étapes du cycle de vie du logiciel.
+
+Le projet sera conduit selon une démarche progressive comprenant :
+
+\begin{itemize}
+\item
+  l'élaboration du cahier des charges ;
+\item
+  l'analyse des besoins ;
+\item
+  la conception du système à l'aide des diagrammes UML ;
+\item
+  l'implémentation de la solution ;
+\item
+  les tests de validation ;
+\item
+  la préparation de la mise en service du système.
+\end{itemize}
+
+Cette approche permettra de garantir la cohérence entre les besoins
+exprimés, la conception du système et la solution implémentée.
+
+\chapter{ÉTUDE D'OPPORTUNITÉ ET JUSTIFICATION DU
+PROJET}\label{chapitre-2-uxe9tude-dopportunituxe9-et-justification-du-projet}
+
+\section{Opportunité du Projet}\label{opportunituxe9-du-projet}
+
+Le secteur agricole fait face à de nombreux défis liés à la gestion de
+l'information, à l'optimisation des rendements et à l'amélioration de la
+prise de décision. Dans de nombreuses exploitations, les informations
+relatives aux cultures sont encore enregistrées de manière manuelle, ce
+qui rend difficile leur exploitation et leur analyse.
+
+Par ailleurs, les agriculteurs disposent rarement d'outils leur
+permettant d'estimer les rendements futurs ou d'obtenir des
+recommandations adaptées à l'état de leurs cultures. Cette situation
+peut entraîner une baisse de productivité ainsi qu'une utilisation
+inefficace des ressources disponibles.
+
+L'évolution des technologies numériques offre aujourd'hui la possibilité
+de développer des solutions intelligentes capables de collecter,
+d'organiser et d'exploiter les données agricoles afin de fournir une
+assistance à la décision.
+
+Le développement d'une application de gestion agricole intelligente
+apparaît ainsi comme une opportunité permettant de moderniser le suivi
+des cultures et d'améliorer la gestion des activités agricoles.
+
+\section{2.2 Justification du Choix du Domaine
+Agricole}\label{justification-du-choix-du-domaine-agricole}
+
+Le choix du domaine agricole s'explique par l'importance stratégique de
+l'agriculture dans le développement économique et la sécurité
+alimentaire.
+
+Les acteurs agricoles sont confrontés à plusieurs problématiques telles
+que :
+
+\begin{itemize}
+\item
+  le suivi difficile des cultures ;
+\item
+  l'absence de centralisation des informations ;
+\item
+  la difficulté d'anticiper les rendements ;
+\item
+  le manque d'assistance dans les décisions agronomiques.
+\end{itemize}
+
+La mise en place d'une application spécialisée permettra d'apporter une
+réponse concrète à ces besoins tout en mettant en pratique les concepts
+étudiés dans le cadre du génie logiciel.
+
+\section{2.3 Justification des Fonctionnalités
+Retenues}\label{justification-des-fonctionnalituxe9s-retenues}
+
+Les fonctionnalités retenues ont été sélectionnées afin de répondre
+directement aux besoins identifiés lors de l'étude préliminaire.
+
+\subsection{Suivi des cultures}\label{suivi-des-cultures}
+
+Le suivi des cultures constitue le cœur fonctionnel de l'application. Il
+permet de conserver les informations relatives aux différentes cultures
+et de suivre leur évolution dans le temps.
+
+\subsection{Prédiction des
+rendements}\label{pruxe9diction-des-rendements}
+
+La prédiction des rendements apporte une dimension intelligente au
+système en permettant aux utilisateurs d'obtenir une estimation de la
+production future à partir des informations enregistrées.
+
+\subsection{Recommandations
+agronomiques}\label{recommandations-agronomiques}
+
+Les recommandations agronomiques visent à assister l'utilisateur dans la
+prise de décision en lui proposant des actions adaptées à la situation
+observée.
+
+\subsection{Gestion des utilisateurs}\label{gestion-des-utilisateurs}
+
+La gestion des utilisateurs permet de sécuriser l'accès aux informations
+et de différencier les responsabilités des différents acteurs du
+système.
+
+\section{2.4 Justification du Périmètre du
+Projet}\label{justification-du-puxe9rimuxe8tre-du-projet}
+
+Compte tenu des délais imposés pour la réalisation du projet, il a été
+nécessaire de définir un périmètre fonctionnel réaliste permettant à la
+fois :
+
+\begin{itemize}
+\item
+  de couvrir les principales problématiques du domaine étudié ;
+\item
+  de produire l'ensemble des livrables exigés ;
+\item
+  de réaliser une implémentation fonctionnelle dans les délais impartis.
+\end{itemize}
+
+Le projet a donc été volontairement limité aux fonctionnalités
+essentielles de gestion des cultures, de prédiction des rendements et de
+recommandation agronomique.
+
+\section{Fonctionnalités Exclues}\label{fonctionnalituxe9s-exclues}
+
+Certaines fonctionnalités ont été volontairement exclues du périmètre du
+projet afin de limiter la complexité de la solution et de respecter les
+contraintes temporelles.
+
+Les fonctionnalités exclues sont notamment :
+
+\begin{itemize}
+\item
+  la gestion financière des exploitations agricoles ;
+\item
+  la commercialisation des produits agricoles ;
+\item
+  la gestion des équipements agricoles ;
+\item
+  les systèmes de paiement électronique ;
+\item
+  la gestion logistique des récoltes ;
+\item
+  l'intégration avec des capteurs IoT réels.
+\end{itemize}
+
+Ces fonctionnalités pourront être envisagées dans le cadre d'évolutions
+futures du système.
+
+\section{Faisabilité du Projet}\label{faisabilituxe9-du-projet}
+
+L'étude de faisabilité montre que le projet peut être réalisé dans les
+délais prévus grâce :
+
+\begin{itemize}
+\item
+  à la disponibilité des outils de développement nécessaires ;
+\item
+  à l'utilisation de technologies maîtrisées ;
+\item
+  à un périmètre fonctionnel raisonnablement limité ;
+\item
+  à une démarche de développement structurée basée sur les principes du
+  génie logiciel.
+\end{itemize}
+
+Le projet est donc jugé techniquement et organisationnellement
+réalisable.
+
+\chapter{PRÉSENTATION GÉNÉRALE DU
+SYSTÈME}\label{chapitre-3-pruxe9sentation-guxe9nuxe9rale-du-systuxe8me}
+
+\section{Vision du Système}\label{vision-du-systuxe8me}
+
+L'application de gestion agricole intelligente est un système
+informatique destiné à assister les acteurs du secteur agricole dans le
+suivi des cultures, l'estimation des rendements et la prise de décision
+agronomique.
+
+Le système permettra aux utilisateurs d'enregistrer les informations
+relatives aux cultures, de suivre leur évolution, d'obtenir des
+prédictions de rendement et de recevoir des recommandations adaptées aux
+observations enregistrées.
+
+L'objectif principal est de fournir un outil centralisé permettant
+d'améliorer la gestion des activités agricoles et d'optimiser la
+productivité des exploitations.
+
+\section{Utilisateurs du Système}\label{utilisateurs-du-systuxe8me}
+
+Le système sera utilisé par plusieurs catégories d'acteurs ayant des
+responsabilités différentes.
+
+\subsection{Agriculteur}\label{agriculteur}
+
+L'agriculteur constitue l'utilisateur principal du système.
+
+Il est chargé de :
+
+\begin{itemize}
+\item
+  enregistrer les cultures ;
+\item
+  consulter les informations relatives aux cultures ;
+\item
+  enregistrer les observations agricoles ;
+\item
+  demander des prédictions de rendement ;
+\item
+  consulter les recommandations agronomiques ;
+\item
+  suivre l'évolution de ses cultures.
+\end{itemize}
+
+\subsection{Agronome}\label{agronome}
+
+L'agronome intervient comme expert agricole.
+
+Il est chargé de :
+
+\begin{itemize}
+\item
+  consulter les informations relatives aux cultures ;
+\item
+  consulter les observations enregistrées ;
+\item
+  proposer ou valider des recommandations agronomiques ;
+\item
+  analyser les résultats des prédictions.
+\end{itemize}
+
+\subsection{Administrateur}\label{administrateur}
+
+L'administrateur assure la gestion globale du système.
+
+Il est chargé de :
+
+\begin{itemize}
+\item
+  gérer les comptes utilisateurs ;
+\item
+  administrer les données de référence ;
+\item
+  superviser le bon fonctionnement de l'application ;
+\item
+  consulter les statistiques globales du système.
+\end{itemize}
+
+\section{3.3 Environnement du
+Système}\label{environnement-du-systuxe8me}
+
+Le système interagit avec différents acteurs et composants externes.
+
+\subsection{Acteurs humains}\label{acteurs-humains}
+
+\begin{itemize}
+\item
+  Agriculteur ;
+\item
+  Agronome ;
+\item
+  Administrateur.
+\end{itemize}
+
+\subsection{Service externe}\label{service-externe}
+
+Le système pourra utiliser un service de prédiction chargé d'estimer les
+rendements agricoles à partir des informations enregistrées sur les
+cultures.
+
+Ce service est considéré comme un acteur externe au système.
+
+\section{3.4 Description Générale des Services
+Offerts}\label{description-guxe9nuxe9rale-des-services-offerts}
+
+L'application offrira les principaux services suivants :
+
+\subsection{Gestion des utilisateurs}\label{gestion-des-utilisateurs-1}
+
+Le système permettra la création, l'authentification et la gestion des
+comptes utilisateurs.
+
+\subsection{Gestion des cultures}\label{gestion-des-cultures}
+
+Le système permettra l'enregistrement, la consultation, la modification
+et la suppression des informations relatives aux cultures.
+
+\subsection{Suivi des cultures}\label{suivi-des-cultures-1}
+
+Le système permettra la saisie et la consultation des observations
+agricoles afin d'assurer un suivi continu de l'évolution des cultures.
+
+\subsection{Prédiction des
+rendements}\label{pruxe9diction-des-rendements-1}
+
+Le système permettra d'estimer les rendements agricoles futurs à partir
+des données enregistrées.
+
+\subsection{Recommandations
+agronomiques}\label{recommandations-agronomiques-1}
+
+Le système fournira des recommandations destinées à assister les
+utilisateurs dans leurs décisions agricoles.
+
+\subsection{Administration}\label{administration}
+
+Le système permettra la gestion des utilisateurs et l'administration
+générale de la plateforme.
+
+\section{Limites du Système}\label{limites-du-systuxe8me}
+
+Dans le cadre de ce projet, le système ne prendra pas en charge :
+
+\begin{itemize}
+\item
+  la gestion financière des exploitations agricoles ;
+\item
+  la commercialisation des produits agricoles ;
+\item
+  la gestion des équipements agricoles ;
+\item
+  les paiements électroniques ;
+\item
+  les données provenant de capteurs IoT réels ;
+\item
+  les données météorologiques en temps réel.
+\end{itemize}
+
+Ces fonctionnalités pourront être intégrées dans les futures évolutions
+du système.
+
+\section{3.6 Diagramme de Contexte du
+Système}\label{diagramme-de-contexte-du-systuxe8me}
+
+Le système interagit avec les acteurs externes suivants :
+
+\begin{itemize}
+\item
+  Agriculteur ;
+\item
+  Agronome ;
+\item
+  Administrateur ;
+\item
+  Service de prédiction.
+\end{itemize}
+
+Les interactions principales sont :
+
+\begin{itemize}
+\item
+  l'agriculteur enregistre et consulte les informations agricoles ;
+\item
+  l'agronome consulte les données et participe aux recommandations ;
+\item
+  l'administrateur gère le système ;
+\item
+  le service de prédiction fournit les estimations de rendement.
+\end{itemize}
+
+Ce diagramme de contexte sera représenté graphiquement dans la phase
+d'analyse afin d'illustrer les échanges entre le système et son
+environnement.
+
+\chapter{EXIGENCES
+FONCTIONNELLES}\label{chapitre-4-exigences-fonctionnelles}
+
+\section{Introduction}\label{introduction}
+
+Les exigences fonctionnelles décrivent les services que le système doit
+fournir à ses utilisateurs afin de répondre aux besoins identifiés lors
+de l'étude préalable.
+
+Elles définissent les fonctionnalités attendues du système
+indépendamment de toute considération technique liée à son
+implémentation.
+
+Les exigences fonctionnelles présentées dans cette section serviront de
+base à la phase d'analyse et à l'élaboration des diagrammes UML.
+
+\section{4.2 Gestion des Comptes
+Utilisateurs}\label{gestion-des-comptes-utilisateurs}
+
+Le système devra permettre la gestion des comptes des différents
+utilisateurs.
+
+À cet effet, il devra offrir les fonctionnalités suivantes :
+
+\begin{itemize}
+\item
+  créer un compte utilisateur ;
+\item
+  s'authentifier dans le système ;
+\item
+  consulter son profil ;
+\item
+  modifier ses informations personnelles ;
+\item
+  se déconnecter du système.
+\end{itemize}
+
+\section{Gestion des Cultures}\label{gestion-des-cultures-1}
+
+Le système devra permettre la gestion des informations relatives aux
+cultures suivies.
+
+Les fonctionnalités attendues sont :
+
+\begin{itemize}
+\item
+  enregistrer une nouvelle culture ;
+\item
+  consulter les informations d'une culture ;
+\item
+  modifier les informations d'une culture ;
+\item
+  supprimer une culture ;
+\item
+  consulter la liste des cultures enregistrées.
+\end{itemize}
+
+Pour chaque culture, le système devra permettre l'enregistrement
+d'informations telles que :
+
+\begin{itemize}
+\item
+  le nom de la culture ;
+\item
+  la date de semis ;
+\item
+  le type de culture ;
+\item
+  le statut de la culture.
+\end{itemize}
+
+\section{Suivi des Cultures}\label{suivi-des-cultures-2}
+
+Le système devra permettre le suivi de l'évolution des cultures au cours
+de leur cycle de production.
+
+Les fonctionnalités attendues sont :
+
+\begin{itemize}
+\item
+  enregistrer une observation agricole ;
+\item
+  consulter les observations enregistrées ;
+\item
+  consulter l'historique des observations ;
+\item
+  suivre l'évolution d'une culture.
+\end{itemize}
+
+Une observation agricole pourra contenir :
+
+\begin{itemize}
+\item
+  la date de l'observation ;
+\item
+  l'état de la culture ;
+\item
+  les remarques de l'utilisateur.
+\end{itemize}
+
+\section{4.5 Prédiction des
+Rendements}\label{pruxe9diction-des-rendements-2}
+
+Le système devra permettre d'estimer les rendements agricoles futurs à
+partir des données enregistrées.
+
+Les fonctionnalités attendues sont :
+
+\begin{itemize}
+\item
+  demander une prédiction de rendement ;
+\item
+  consulter le résultat d'une prédiction ;
+\item
+  consulter l'historique des prédictions.
+\end{itemize}
+
+Le système devra fournir une estimation du rendement attendu pour une
+culture donnée.
+
+\section{4.6 Gestion des Recommandations
+Agronomiques}\label{gestion-des-recommandations-agronomiques}
+
+Le système devra assister les utilisateurs dans leurs décisions
+agricoles à travers des recommandations adaptées.
+
+Les fonctionnalités attendues sont :
+
+\begin{itemize}
+\item
+  générer une recommandation agronomique ;
+\item
+  consulter les recommandations disponibles ;
+\item
+  consulter l'historique des recommandations.
+\end{itemize}
+
+Les recommandations pourront concerner :
+
+\begin{itemize}
+\item
+  les actions à entreprendre ;
+\item
+  le suivi des cultures ;
+\item
+  l'amélioration des pratiques agricoles.
+\end{itemize}
+
+\section{4.7 Administration du
+Système}\label{administration-du-systuxe8me}
+
+Le système devra permettre à l'administrateur d'assurer le bon
+fonctionnement de la plateforme.
+
+Les fonctionnalités attendues sont :
+
+\begin{itemize}
+\item
+  consulter les utilisateurs enregistrés ;
+\item
+  gérer les comptes utilisateurs ;
+\item
+  consulter les statistiques générales du système ;
+\item
+  administrer les données de référence.
+\end{itemize}
+
+\section{4.8 Priorisation des Exigences
+Fonctionnelles}\label{priorisation-des-exigences-fonctionnelles}
+
+Afin de respecter les contraintes temporelles du projet, les exigences
+fonctionnelles sont classées selon leur niveau de priorité.
+
+\subsection{Priorité élevée}\label{priorituxe9-uxe9levuxe9e}
+
+\begin{itemize}
+\item
+  Gestion des comptes utilisateurs ;
+\item
+  Gestion des cultures ;
+\item
+  Suivi des cultures ;
+\item
+  Prédiction des rendements ;
+\item
+  Recommandations agronomiques.
+\end{itemize}
+
+\subsection{Priorité moyenne}\label{priorituxe9-moyenne}
+
+\begin{itemize}
+\item
+  Gestion des statistiques ;
+\item
+  Consultation des historiques détaillés.
+\end{itemize}
+
+\subsection{Priorité faible}\label{priorituxe9-faible}
+
+\begin{itemize}
+\item
+  Fonctionnalités avancées d'analyse ;
+\item
+  Extensions futures du système.
+\end{itemize}
+
+\chapter{EXIGENCES NON
+FONCTIONNELLES}\label{chapitre-5-exigences-non-fonctionnelles}
+
+\section{Introduction}\label{introduction-1}
+
+Les exigences non fonctionnelles définissent les contraintes de qualité
+que doit respecter le système afin de garantir son bon fonctionnement et
+sa capacité à satisfaire les utilisateurs.
+
+Elles concernent notamment la performance, la sécurité, la fiabilité, la
+maintenabilité et l'ergonomie de l'application.
+
+\section{Validité}\label{validituxe9}
+
+Le système devra répondre aux besoins exprimés dans le cahier des
+charges.
+
+Toutes les fonctionnalités implémentées devront contribuer directement
+aux objectifs du projet, notamment :
+
+\begin{itemize}
+\item
+  le suivi des cultures ;
+\item
+  la prédiction des rendements ;
+\item
+  les recommandations agronomiques.
+\end{itemize}
+
+Les résultats produits devront être cohérents avec les données fournies
+par les utilisateurs.
+
+\section{Fiabilité}\label{fiabilituxe9}
+
+Le système devra assurer un fonctionnement stable et cohérent.
+
+À cet effet :
+
+\begin{itemize}
+\item
+  les données enregistrées devront être conservées correctement ;
+\item
+  les traitements effectués devront produire des résultats cohérents ;
+\item
+  les erreurs devront être gérées afin d'éviter toute interruption
+  brutale du système.
+\end{itemize}
+
+\section{5.4 Performance et
+Efficacité}\label{performance-et-efficacituxe9}
+
+Le système devra fournir des temps de réponse acceptables pour les
+opérations courantes.
+
+Les opérations suivantes devront être exécutées de manière fluide :
+
+\begin{itemize}
+\item
+  authentification des utilisateurs ;
+\item
+  consultation des cultures ;
+\item
+  enregistrement des observations ;
+\item
+  consultation des recommandations.
+\end{itemize}
+
+Le système devra également utiliser efficacement les ressources
+matérielles disponibles.
+
+\section{5.5 Sécurité et
+Intégrité}\label{suxe9curituxe9-et-intuxe9grituxe9}
+
+Le système devra garantir la protection des données et des accès.
+
+Pour cela :
+
+\begin{itemize}
+\item
+  chaque utilisateur devra disposer d'un compte personnel ;
+\item
+  l'accès aux fonctionnalités devra dépendre du rôle de l'utilisateur ;
+\item
+  les données devront être protégées contre les accès non autorisés ;
+\item
+  les opérations sensibles devront être réservées aux utilisateurs
+  habilités.
+\end{itemize}
+
+\section{Facilité d'Utilisation}\label{facilituxe9-dutilisation}
+
+L'interface du système devra être simple et intuitive.
+
+Les utilisateurs devront pouvoir :
+
+\begin{itemize}
+\item
+  accéder facilement aux fonctionnalités principales ;
+\item
+  comprendre rapidement les informations affichées ;
+\item
+  effectuer les opérations courantes avec un minimum d'effort.
+\end{itemize}
+
+\section{Maintenabilité}\label{maintenabilituxe9}
+
+Le système devra être conçu de manière à faciliter :
+
+\begin{itemize}
+\item
+  la correction des anomalies ;
+\item
+  l'ajout de nouvelles fonctionnalités ;
+\item
+  l'évolution future du système.
+\end{itemize}
+
+La structure de l'application devra favoriser une organisation modulaire
+et cohérente.
+
+\section{Extensibilité}\label{extensibilituxe9}
+
+Le système devra permettre l'ajout futur de nouvelles fonctionnalités
+sans remise en cause majeure de l'architecture existante.
+
+Par exemple :
+
+\begin{itemize}
+\item
+  intégration de données météorologiques ;
+\item
+  intégration de capteurs IoT ;
+\item
+  ajout de nouveaux modèles de prédiction ;
+\item
+  développement d'une application mobile.
+\end{itemize}
+
+\section{Portabilité}\label{portabilituxe9}
+
+Le système devra être accessible sur les principaux navigateurs
+modernes.
+
+L'application devra pouvoir être déployée sur différents environnements
+logiciels sans modification majeure.
+
+\section{Compatibilité}\label{compatibilituxe9}
+
+Le système devra être conçu de manière à permettre une future
+interaction avec d'autres systèmes agricoles ou services externes.
+
+Cette exigence facilitera les évolutions futures de la plateforme.
+
+\section{Vérifiabilité}\label{vuxe9rifiabilituxe9}
+
+Chaque fonctionnalité devra pouvoir être testée et validée à l'aide de
+scénarios de test clairement définis.
+
+Les résultats attendus devront être vérifiables afin de faciliter la
+phase de validation du système.
+
+\section{Réutilisabilité}\label{ruxe9utilisabilituxe9}
+
+Les composants logiciels développés devront être conçus de manière à
+favoriser leur réutilisation dans d'autres projets similaires lorsque
+cela est possible.
+
+\chapter{RESSOURCES, CONTRAINTES ET
+PLANIFICATION}\label{chapitre-6-ressources-contraintes-et-planification}
+
+\section{Ressources Humaines}\label{ressources-humaines}
+
+La réalisation du projet nécessite l'intervention des acteurs suivants :
+
+\subsection{Étudiant Développeur (Redacteur de ce document : Tambou et
+Bella)}\label{uxe9tudiant-duxe9veloppeur-redacteur-de-ce-document-tambou-et-bella}
+
+Nous sommes chargés de :
+
+\begin{itemize}
+\item
+  l'analyse des besoins ;
+\item
+  la conception du système ;
+\item
+  l'implémentation de la solution ;
+\item
+  les tests ;
+\item
+  la rédaction de la documentation.
+\end{itemize}
+
+\subsection{Enseignant Encadreur}\label{enseignant-encadreur}
+
+Il intervient pour :
+
+\begin{itemize}
+\item
+  orienter les travaux ;
+\item
+  valider les livrables ;
+\item
+  évaluer les résultats obtenus.
+\end{itemize}
+
+\subsection{Utilisateurs Cibles}\label{utilisateurs-cibles}
+
+Les futurs utilisateurs participent indirectement à la définition des
+besoins du système.
+
+Ils sont représentés par :
+
+\begin{itemize}
+\item
+  les agriculteurs ;
+\item
+  les agronomes ;
+\item
+  les administrateurs.
+\end{itemize}
+
+\section{Ressources Matérielles}\label{ressources-matuxe9rielles}
+
+Les ressources matérielles nécessaires sont :
+
+\begin{itemize}
+\item
+  un ordinateur de développement ;
+\item
+  une connexion Internet ;
+\item
+  un espace de stockage pour les données du projet.
+\end{itemize}
+
+\section{Ressources Logicielles}\label{ressources-logicielles}
+
+Les ressources logicielles prévues sont :
+
+\subsection{Outils de modélisation}\label{outils-de-moduxe9lisation}
+
+\begin{itemize}
+\item
+  StarUML ou équivalent ;
+\item
+  Draw.io ou équivalent.
+\end{itemize}
+
+\subsection{Outils de développement}\label{outils-de-duxe9veloppement}
+
+\begin{itemize}
+\item
+  Environnement de développement intégré (IDE) ;
+\item
+  Gestionnaire de versions Git.
+\end{itemize}
+
+\subsection{Base de données}\label{base-de-donnuxe9es}
+
+\begin{itemize}
+\tightlist
+\item
+  Système de gestion de base de données relationnelle.
+\end{itemize}
+
+\subsection{Outils de documentation}\label{outils-de-documentation}
+
+\begin{itemize}
+\item
+  Microsoft Word ou équivalent ;
+\item
+  Export PDF.
+\end{itemize}
+
+\section{Contraintes du Projet}\label{contraintes-du-projet}
+
+\subsection{Contraintes Temporelles}\label{contraintes-temporelles}
+
+Le projet a été attribué le 02 juin.
+
+Les livrables suivants doivent être produits :
+
+\begin{itemize}
+\item
+  Cahier des charges ;
+\item
+  Cahier d'analyse ;
+\item
+  Cahier de conception.
+\end{itemize}
+
+Ces documents devront être remis au plus tard le 09 juin.
+
+L'application fonctionnelle devra être développée et présentée au plus
+tard le 29 juin.
+
+Cette contrainte impose une maîtrise du périmètre fonctionnel afin de
+garantir l'achèvement du projet dans les délais prévus.
+
+\subsection{Contraintes Académiques}\label{contraintes-acaduxe9miques}
+
+Le projet doit respecter les principes du génie logiciel étudiés dans le
+cadre du cours.
+
+Il doit notamment inclure :
+
+\begin{itemize}
+\item
+  une analyse des besoins ;
+\item
+  une modélisation UML ;
+\item
+  une conception cohérente ;
+\item
+  une implémentation conforme aux modèles produits.
+\end{itemize}
+
+\subsection{Contraintes Techniques}\label{contraintes-techniques}
+
+Le choix des technologies de développement est laissé libre.
+
+Toutefois, les technologies retenues devront permettre :
+
+\begin{itemize}
+\item
+  une implémentation rapide ;
+\item
+  une architecture claire ;
+\item
+  une maintenance facilitée.
+\end{itemize}
+
+\section{6.5 Planification
+Prévisionnelle}\label{planification-pruxe9visionnelle}
+
+Le projet sera réalisé selon le calendrier suivant :
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\endhead
+Période & Activité \\
+02 juin -- 09 juin & Cahier des charges, analyse et conception \\
+10 juin -- 15 juin & Mise en place de l'architecture et de la base de
+données \\
+16 juin -- 22 juin & Développement des fonctionnalités principales \\
+23 juin -- 27 juin & Tests et corrections \\
+28 juin -- 29 juin & Finalisation et préparation de la démonstration \\
+\bottomrule
+\end{longtable}
+
+Cette planification a été établie en tenant compte des contraintes
+académiques et du périmètre fonctionnel retenu.
+
+\section{6.6 Priorisation des
+Fonctionnalités}\label{priorisation-des-fonctionnalituxe9s}
+
+\subsection{Priorité Critique}\label{priorituxe9-critique}
+
+\begin{itemize}
+\item
+  Authentification des utilisateurs ;
+\item
+  Gestion des cultures ;
+\item
+  Suivi des cultures ;
+\item
+  Prédiction des rendements ;
+\item
+  Recommandations agronomiques.
+\end{itemize}
+
+\subsection{Priorité Importante}\label{priorituxe9-importante}
+
+\begin{itemize}
+\item
+  Consultation des historiques ;
+\item
+  Gestion des profils utilisateurs.
+\end{itemize}
+
+\subsection{Priorité Secondaire}\label{priorituxe9-secondaire}
+
+\begin{itemize}
+\item
+  Statistiques avancées ;
+\item
+  Extensions futures.
+\end{itemize}
+
+\section{Évolutions Futures}\label{uxe9volutions-futures}
+
+Plusieurs extensions pourront être envisagées dans les versions futures
+du système :
+
+\begin{itemize}
+\item
+  intégration de données météorologiques en temps réel ;
+\item
+  intégration de capteurs IoT agricoles ;
+\item
+  cartographie des exploitations agricoles ;
+\item
+  application mobile ;
+\item
+  amélioration des algorithmes de prédiction ;
+\item
+  génération automatique de rapports agricoles ;
+\item
+  système de notification intelligent.
+\end{itemize}
+
+Ces évolutions permettront d'accroître progressivement les capacités du
+système tout en conservant l'architecture définie dans le cadre du
+présent projet.
+
+\chapter{CONCLUSION}\label{chapitre-7-conclusion}
+
+Le présent cahier des charges a permis de définir les besoins et les
+exigences relatifs au projet d'analyse, de conception et
+d'implémentation d'une application de gestion agricole intelligente.
+
+L'étude réalisée a mis en évidence la nécessité de disposer d'un outil
+capable d'assurer le suivi des cultures, la prédiction des rendements
+agricoles et la fourniture de recommandations agronomiques afin
+d'améliorer la prise de décision des acteurs du secteur agricole.
+
+Les fonctionnalités attendues du système ont été identifiées et
+structurées sous forme d'exigences fonctionnelles et non fonctionnelles.
+Les ressources nécessaires à la réalisation du projet ainsi que les
+contraintes de temps, de qualité et d'organisation ont également été
+précisées.
+
+Compte tenu des délais imposés pour la réalisation du projet, un
+périmètre fonctionnel maîtrisé a été retenu afin de garantir la
+production des différents livrables ainsi que l'implémentation effective
+d'une solution opérationnelle.
+
+Le présent document constitue ainsi la référence de base pour les phases
+suivantes du projet, notamment l'analyse des besoins, la conception du
+système, l'implémentation de la solution et les activités de validation.
+\end{document}

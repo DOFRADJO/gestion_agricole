@@ -1,0 +1,83 @@
+% Cahier d'analyse - Gestion Agricole Intelligente
+\documentclass[12pt,a4paper]{report}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{float}
+\usepackage[table]{xcolor}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\geometry{top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm}
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.2}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\begin{document}
+\begin{titlepage}
+  \begin{minipage}[t]{0.48\textwidth}
+    \raggedright
+    {\small UNIVERSITÉ DE YAOUNDÉ I}\\[0.2cm]
+    {\small **********}\\[0.2cm]
+    {\small ÉCOLE NATIONALE SUPÉRIEURE POLYTECHNIQUE DE YAOUNDÉ}\\[0.2cm]
+    {\small **********}\\[0.2cm]
+    {\small DÉPARTEMENT DU GÉNIE}\\
+    {\small INFORMATIQUE}\\[0.2cm]
+    {\small **********}\\[0.2cm]
+    {\small ARTS NUMÉRIQUES}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \raggedleft
+    {\small THE UNIVERSITY OF YAOUNDE I}\\[0.2cm]
+    {\small **********}\\[0.2cm]
+    {\small NATIONAL ADVANCED SCHOOL OF ENGINEERING OF YAOUNDE}\\[0.2cm]
+    {\small **********}\\[0.2cm]
+    {\small DEPARTMENT OF COMPUTER}\\
+    {\small ENGINEERING}\\[0.2cm]
+    {\small **********}\\[0.2cm]
+    {\small DIGITAL ARTS}
+  \end{minipage}
+
+  \begin{center}
+    \includegraphics[width=0.28\textwidth]{images/logo-enspy.png}\\[1cm]
+
+    {\LARGE \textbf{Cahier d'analyse}}\\[0.6cm]
+    {\Huge \textbf{Analyse fonctionnelle d'une application de gestion agricole intelligente}}\\[1cm]
+
+    {\large \textit{Genie Logiciel I}}\\[0.8cm]
+
+    {\large \textbf{Rédaction}}\\[0.3cm]
+    {\large Tambou Djomou Franck Donald 23P732}\\
+    {\large Kanmo Ngamini Bella Rinda 22P008}\\[0.8cm]
+
+    {\large Encadrant : Dr Kungne}\\[0.4cm]
+    {\large Date : juin 2026}\\[0.4cm]
+
+    {\small \textit{Ce document présente l'analyse fonctionnelle et les cas d'utilisation du projet.}}
+  \end{center}
+
+  \vfill
+  \thispagestyle{empty}
+\end{titlepage}
+\pagenumbering{roman}
+\tableofcontents
+\listoffigures
+\clearpage
+\pagenumbering{arabic}
+\input{Cahier_Analyse_Gestion_Agricole_Intelligente_body_only.tex}
+\end{document}
