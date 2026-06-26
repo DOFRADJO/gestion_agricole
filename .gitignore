@@ -26,3 +26,29 @@
 *~
 *.swp
 *.swo
+
+
+
+
+# Virtual Environment
+gestion_agricole_intelligente/.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Django
+db.sqlite3
+media/
+staticfiles/
+
+# Environment
+gestion_agricole_intelligente/.env
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
