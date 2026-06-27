@@ -1,6 +1,6 @@
 # Gestion Agricole Intelligente
 
-Application web Django pour la gestion intelligente des cultures agricoles, développée avec Django 6, Python 3.13 et MySQL.
+Application web Django pour la gestion intelligente des cultures agricoles, développée avec Django 6.0.6, Python 3.13 et compatible MySQL/SQLite.
 
 ## 📋 Table des matières
 
@@ -17,8 +17,8 @@ Application web Django pour la gestion intelligente des cultures agricoles, dév
 ### Prérequis
 
 - Python 3.13+
-- MySQL 8.0+
 - pip et virtualenv
+- MySQL 8.0+ (optionnel, uniquement si vous souhaitez exécuter l'application avec MySQL)
 
 ### Étapes d'installation
 
@@ -39,8 +39,14 @@ source .venv/bin/activate  # Sur Linux/Mac
 
 3. **Installer les dépendances**
 ```bash
+# Si un fichier requirements.txt est disponible
 pip install -r requirements.txt
+
+# Sinon installer manuellement les dépendances principales
+pip install django mysqlclient django-environ pillow
 ```
+
+> Note : le dépôt actuel peut ne pas inclure de fichier `requirements.txt`. Installez les dépendances manuellement si nécessaire.
 
 ## ⚙️ Configuration
 
@@ -271,6 +277,7 @@ gestion_agricole_intelligente/
 │   │       └── init_application.py  # Initialisation de l'application
 │   └── tests.py            # Tests communs
 ├── cultures/               # Gestion des cultures
+├── dashboard/              # Dashboard personnalisé
 ├── observations/           # Observations des cultures
 ├── predictions/            # Prédictions de rendement
 ├── recommandations/        # Recommandations
@@ -279,6 +286,7 @@ gestion_agricole_intelligente/
 │   ├── utilisateur_service.py        # Service de gestion des utilisateurs
 │   ├── culture_service.py            # Service de gestion des cultures
 │   └── ...                           # Autres services
+├── config/                 # Configuration et utilitaires d'application
 ├── templates/              # Templates HTML
 │   ├── base/               # Templates de base
 │   ├── authentication/     # Templates d'authentification
@@ -288,7 +296,6 @@ gestion_agricole_intelligente/
 ├── media/                  # Fichiers uploadés
 ├── docs/                   # Documentation technique
 ├── manage.py               # Utilitaire Django
-├── requirements.txt        # Dépendances Python
 └── README.md              # Ce fichier
 ```
 
@@ -337,6 +344,13 @@ Voir les fichiers dans le dossier `docs/` :
 Le module `observations` (CU3) permet d'enregistrer et gérer des relevés liés aux cultures.
 
 - Documentation détaillée : [docs/observations.md](docs/observations.md)
+
+## Prédictions
+
+Le module `predictions` (CU4) permet de consulter des prédictions de rendement générées automatiquement à partir des observations.
+
+- Documentation détaillée : [docs/predictions.md](docs/predictions.md)
+- Documentation détaillée : [docs/predictions.md](docs/predictions.md)
 
 
 ## 🔧 Commandes utiles

@@ -1,0 +1,36 @@
+{% extends "base/base.html" %}
+
+{% block title %}Détail de la prédiction{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    {% include "components/breadcrumb.html" with section="Prédictions" title="Détail de la prédiction" %}
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="mb-3">{{ prediction.culture.nom }}</h5>
+                    <p class="text-muted mb-4">Culture de {{ prediction.culture.agriculteur.get_full_name }} — {{ prediction.culture.localisation }}</p>
+
+                    <dl class="row">
+                        <dt class="col-sm-4">Date de prédiction</dt>
+                        <dd class="col-sm-8">{{ prediction.datePrediction|date:"d/m/Y" }}</dd>
+
+                        <dt class="col-sm-4">Rendement estimé</dt>
+                        <dd class="col-sm-8">{{ prediction.rendementEstime }} t/ha</dd>
+
+                        <dt class="col-sm-4">Niveau de confiance</dt>
+                        <dd class="col-sm-8">{{ prediction.niveauConfiance|floatformat:2 }}</dd>
+
+                        <dt class="col-sm-4">Commentaires</dt>
+                        <dd class="col-sm-8">{{ prediction.commentaires|default:"Aucun commentaire." }}</dd>
+                    </dl>
+
+                    <a href="{% url 'predictions:historique' %}" class="btn btn-outline-secondary">Voir l'historique des prédictions</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -428,4 +428,4 @@ authenticate(password=password)  # Django hash et compare
 5. **Email verification** après inscription
 6. **Password reset** par email
 
-Voir `docs/deployment.md` pour la sécurité en production.
+Voir la documentation officielle Django pour la sécurité en production.

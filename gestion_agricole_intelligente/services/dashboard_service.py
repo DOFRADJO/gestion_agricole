@@ -3,6 +3,8 @@ from django.utils import timezone
 from utilisateurs.models import Utilisateur, Agriculteur, Agronome
 from cultures.models import Culture
 from observations.models import Observation
+from predictions.models import Prediction
+from services.prediction_service import PredictionService
 
 
 class DashboardService:
@@ -60,7 +62,7 @@ class DashboardService:
             },
             {
                 "label": "Prédictions",
-                "value": 0,
+                "value": Prediction.objects.count(),
                 "icon": "bi-bar-chart-line",
                 "variant": "warning",
             },
@@ -81,6 +83,7 @@ class DashboardService:
         ]
         quick_actions = [
             {"label": "Voir toutes les cultures", "url": "/cultures/", "icon": "bi-seedling"},
+            {"label": "Explorer les prédictions", "url": "/predictions/", "icon": "bi-bar-chart-line"},
             {"label": "Accéder à l'administration", "url": "/admin/", "icon": "bi-gear"},
         ]
 
@@ -113,6 +116,12 @@ class DashboardService:
                 "icon": "bi-eye",
                 "variant": "secondary",
             },
+            {
+                "label": "Prédictions",
+                "value": Prediction.objects.count(),
+                "icon": "bi-bar-chart-line",
+                "variant": "warning",
+            },
         ]
         activites_recents = [
             {
@@ -124,6 +133,7 @@ class DashboardService:
         ]
         quick_actions = [
             {"label": "Explorer les cultures", "url": "/cultures/", "icon": "bi-seedling"},
+            {"label": "Voir les prédictions", "url": "/predictions/", "icon": "bi-bar-chart-line"},
         ]
 
         return {
@@ -145,10 +155,10 @@ class DashboardService:
                 "variant": "primary",
             },
             {
-                "label": "Rendements",
-                "value": 0,
+                "label": "Prédictions",
+                "value": Prediction.objects.filter(culture__agriculteur=utilisateur.agriculteur).count(),
                 "icon": "bi-bar-chart-line",
-                "variant": "info",
+                "variant": "warning",
             },
             {
                 "label": "Recommandations",
@@ -168,6 +178,7 @@ class DashboardService:
         quick_actions = [
             {"label": "Ajouter une culture", "url": "/cultures/ajouter/", "icon": "bi-plus-lg"},
             {"label": "Voir mes cultures", "url": "/cultures/", "icon": "bi-list-ul"},
+            {"label": "Voir mes prédictions", "url": "/predictions/", "icon": "bi-bar-chart-line"},
         ]
 
         return {
