@@ -1,0 +1,73 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+Mes cultures
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+<h2>Mes cultures</h2>
+
+<a href="{% url 'cultures:ajouter' %}" class="btn btn-success mb-3">
+
+Nouvelle culture
+
+</a>
+
+<table class="table table-bordered table-striped">
+
+<thead>
+
+<tr>
+
+<th>Nom</th>
+
+<th>Superficie</th>
+
+<th>Date plantation</th>
+
+<th>Localisation</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for culture in cultures %}
+
+<tr>
+
+<td>{{ culture.nom }}</td>
+
+<td>{{ culture.superficie }}</td>
+
+<td>{{ culture.date_plantation }}</td>
+
+<td>{{ culture.localisation }}</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+<td colspan="4">
+
+Aucune culture enregistrée.
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+{% endblock %}

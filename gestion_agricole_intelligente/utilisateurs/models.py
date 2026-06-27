@@ -32,6 +32,22 @@ class Utilisateur(AbstractUser):
         nom = self.get_full_name().strip()
         return nom if nom else self.email
 
+    def get_type_utilisateur(self):
+        """
+        Retourne le type réel de l'utilisateur.
+        """
+
+        if Administrateur.objects.filter(pk=self.pk).exists():
+            return "administrateur"
+
+        if Agronome.objects.filter(pk=self.pk).exists():
+            return "agronome"
+
+        if Agriculteur.objects.filter(pk=self.pk).exists():
+            return "agriculteur"
+
+        return "utilisateur"
+
 
 class Agriculteur(Utilisateur):
 
