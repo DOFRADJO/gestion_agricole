@@ -1,56 +1,13 @@
 from django.utils import timezone
 
-from utilisateurs.models import Utilisateur
+from utilisateurs.models import Utilisateur, Agriculteur, Agronome
 from cultures.models import Culture
+from observations.models import Observation
 
 
 class DashboardService:
     """
     Fournit les métriques et données pour les tableaux de bord.
-    """
-
-    @staticmethod
-    def obtenir_dashboard(utilisateur):
-        # Counts
-        total_cultures = Culture.objects.count()
-        total_agriculteurs = Utilisateur.objects.filter(
-            agriculteur__isnull=False
-        ).count()
-        total_agronomes = Utilisateur.objects.filter(
-            agronome__isnull=False
-        ).count()
-        total_administrateurs = Utilisateur.objects.filter(
-            administrateur__isnull=False
-        ).count()
-
-        # Placeholder counts for other modules (may be implemented later)
-        total_observations = 0
-        total_predictions = 0
-        total_recommandations = 0
-
-        # Recent activities: last 5 cultures created
-        recent_cultures = Culture.objects.select_related("agriculteur").order_by("-date_creation")[:5]
-
-        contexte = {
-            "total_cultures": total_cultures,
-            "total_agriculteurs": total_agriculteurs,
-            "total_agronomes": total_agronomes,
-            "total_administrateurs": total_administrateurs,
-            "total_observations": total_observations,
-            "total_predictions": total_predictions,
-            "total_recommandations": total_recommandations,
-            "recent_cultures": recent_cultures,
-            "now": timezone.now(),
-        }
-
-        return contexte
-from cultures.models import Culture
-from utilisateurs.models import Agriculteur, Agronome
-
-
-class DashboardService:
-    """
-    Service responsable des données des tableaux de bord.
     """
 
     @staticmethod
@@ -71,6 +28,7 @@ class DashboardService:
             "statistiques": [],
             "activites_recents": [],
             "quick_actions": [],
+            "now": timezone.now(),
         }
 
     @staticmethod
@@ -96,7 +54,7 @@ class DashboardService:
             },
             {
                 "label": "Observations",
-                "value": 0,
+                "value": Observation.objects.count(),
                 "icon": "bi-eye",
                 "variant": "secondary",
             },
@@ -115,11 +73,11 @@ class DashboardService:
         ]
         activites_recents = [
             {
-                "title": f"{culture.nom} mis à jour",
+                "title": f"{culture.nom} semé",
                 "description": f"{culture.agriculteur.get_full_name} — {culture.localisation.title()}",
-                "date": culture.date_modification,
+                "date": culture.date_semis,
             }
-            for culture in Culture.objects.select_related("agriculteur").order_by("-date_modification")[:5]
+            for culture in Culture.objects.select_related("agriculteur").order_by("-date_semis")[:5]
         ]
         quick_actions = [
             {"label": "Voir toutes les cultures", "url": "/cultures/", "icon": "bi-seedling"},
@@ -131,6 +89,7 @@ class DashboardService:
             "statistiques": statistiques,
             "activites_recents": activites_recents,
             "quick_actions": quick_actions,
+            "now": timezone.now(),
         }
 
     @staticmethod
@@ -150,18 +109,18 @@ class DashboardService:
             },
             {
                 "label": "Observations",
-                "value": 0,
+                "value": Observation.objects.count(),
                 "icon": "bi-eye",
                 "variant": "secondary",
             },
         ]
         activites_recents = [
             {
-                "title": f"{culture.nom} mise à jour",
+                "title": f"{culture.nom} semé",
                 "description": f"{culture.agriculteur.get_full_name} — {culture.localisation.title()}",
-                "date": culture.date_modification,
+                "date": culture.date_semis,
             }
-            for culture in Culture.objects.select_related("agriculteur").order_by("-date_modification")[:5]
+            for culture in Culture.objects.select_related("agriculteur").order_by("-date_semis")[:5]
         ]
         quick_actions = [
             {"label": "Explorer les cultures", "url": "/cultures/", "icon": "bi-seedling"},
@@ -172,6 +131,7 @@ class DashboardService:
             "statistiques": statistiques,
             "activites_recents": activites_recents,
             "quick_actions": quick_actions,
+            "now": timezone.now(),
         }
 
     @staticmethod
@@ -199,11 +159,11 @@ class DashboardService:
         ]
         activites_recents = [
             {
-                "title": f"{culture.nom} mise à jour",
+                "title": f"{culture.nom} semé",
                 "description": f"{culture.localisation.title()}",
-                "date": culture.date_modification,
+                "date": culture.date_semis,
             }
-            for culture in propres_cultures.order_by("-date_modification")[:5]
+            for culture in propres_cultures.order_by("-date_semis")[:5]
         ]
         quick_actions = [
             {"label": "Ajouter une culture", "url": "/cultures/ajouter/", "icon": "bi-plus-lg"},
@@ -215,4 +175,5 @@ class DashboardService:
             "statistiques": statistiques,
             "activites_recents": activites_recents,
             "quick_actions": quick_actions,
+            "now": timezone.now(),
         }

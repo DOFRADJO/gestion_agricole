@@ -26,6 +26,7 @@ urlpatterns = [
     path("", include("authentication.urls")),
     path("", include("core.urls")),
     path("cultures/", include("cultures.urls")),
+    path("observations/", include("observations.urls")),
 ]
 
 if settings.DEBUG:

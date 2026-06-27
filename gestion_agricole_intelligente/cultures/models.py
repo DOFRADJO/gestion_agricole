@@ -2,6 +2,7 @@ from datetime import date
 
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils import timezone
 
 from utilisateurs.models import Agriculteur
 
@@ -29,35 +30,29 @@ class Culture(models.Model):
         verbose_name="Superficie (ha)",
     )
 
-    date_plantation = models.DateField(
-        verbose_name="Date de plantation",
-    )
-
     localisation = models.CharField(
         max_length=255,
         verbose_name="Localisation",
     )
 
-    description = models.TextField(
-        blank=True,
-        verbose_name="Description",
+    date_semis = models.DateField(
+        verbose_name="Date de semis",
+        default=timezone.now,
     )
 
-    date_creation = models.DateTimeField(
-        auto_now_add=True,
-    )
-
-    date_modification = models.DateTimeField(
-        auto_now=True,
+    statut = models.CharField(
+        max_length=50,
+        verbose_name="Statut",
+        default="En cours",
     )
 
     class Meta:
         verbose_name = "Culture"
         verbose_name_plural = "Cultures"
-        ordering = ["-date_modification"]
+        ordering = ["-date_semis"]
         indexes = [
             models.Index(fields=["nom"]),
-            models.Index(fields=["date_plantation"]),
+            models.Index(fields=["date_semis"]),
             models.Index(fields=["localisation"]),
         ]
         unique_together = ("agriculteur", "nom")
@@ -69,15 +64,15 @@ class Culture(models.Model):
         if self.superficie <= 0:
             raise ValidationError({"superficie": "La superficie doit être supérieure à zéro."})
 
-        if self.date_plantation and self.date_plantation > date.today():
+        if self.date_semis and self.date_semis > date.today():
             raise ValidationError(
-                {"date_plantation": "La date de plantation ne peut pas être dans le futur."}
+                {"date_semis": "La date de semis ne peut pas être dans le futur."}
             )
 
     def age_en_jours(self):
-        if not self.date_plantation:
+        if not self.date_semis:
             return 0
-        return (date.today() - self.date_plantation).days
+        return (date.today() - self.date_semis).days
 
     def localisation_complete(self):
         return self.localisation.title()

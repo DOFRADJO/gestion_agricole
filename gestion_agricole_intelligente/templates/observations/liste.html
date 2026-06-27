@@ -1,0 +1,61 @@
+{% extends "base/base.html" %}
+
+{% block title %}Observations{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    {% include "components/breadcrumb.html" with section="Observations" title="Liste des observations" %}
+
+    <div class="d-flex justify-content-between mb-4">
+        <div>
+            <h3 class="mb-1">Observations</h3>
+            <p class="text-muted mb-0">{{ total }} observation{{ total|pluralize }} trouvée{{ total|pluralize }}</p>
+        </div>
+        {% if request.user.get_type_utilisateur == 'agriculteur' %}
+        <a href="{% url 'observations:ajouter' %}" class="btn btn-primary">
+            <i class="bi bi-plus-lg me-2"></i>Nouvelle observation
+        </a>
+        {% endif %}
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Culture</th>
+                            <th>Description</th>
+                            <th>Date</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for obs in observations %}
+                            <tr>
+                                <td><a href="{% url 'cultures:detail' obs.culture.pk %}">{{ obs.culture.nom }}</a></td>
+                                <td>{{ obs.description|truncatechars:80 }}</td>
+                                <td>{{ obs.date_observation }}</td>
+                                <td class="text-end">
+                                    <a href="{% url 'observations:detail' obs.pk %}" class="btn btn-sm btn-outline-primary me-1">Voir</a>
+                                    {% if request.user.get_type_utilisateur == 'agriculteur' and obs.culture.agriculteur == request.user.agriculteur %}
+                                    <a href="{% url 'observations:modifier' obs.pk %}" class="btn btn-sm btn-outline-secondary me-1">Modifier</a>
+                                    <a href="{% url 'observations:supprimer' obs.pk %}" class="btn btn-sm btn-outline-danger">Supprimer</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="5" class="text-center py-4">Aucune observation enregistrée.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt-3">
+                {% include 'components/pagination.html' with page_obj=page_obj query_params=query_params %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

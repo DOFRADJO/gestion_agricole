@@ -17,14 +17,15 @@ class CultureService:
     FILTRES = {
         "nom": "nom__icontains",
         "localisation": "localisation__icontains",
+        "statut": "statut__icontains",
     }
 
     TRI_AUTORISE = {
         "nom": "nom",
         "superficie": "superficie",
-        "date_plantation": "date_plantation",
-        "date_modification": "date_modification",
-        "date_creation": "date_creation",
+        "date_semis": "date_semis",
+        "localisation": "localisation",
+        "statut": "statut",
     }
 
     @staticmethod
@@ -36,11 +37,11 @@ class CultureService:
 
     @staticmethod
     def creer_culture(utilisateur, formulaire):
+        if utilisateur.get_type_utilisateur() != "agriculteur":
+            raise PermissionDenied("Seul l'agriculteur peut créer une culture.")
+
         culture = formulaire.save(commit=False)
-
-        if utilisateur.get_type_utilisateur() == "agriculteur":
-            culture.agriculteur = utilisateur.agriculteur
-
+        culture.agriculteur = utilisateur.agriculteur
         culture.full_clean()
         culture.save()
         return culture
@@ -63,21 +64,21 @@ class CultureService:
             cultures = cultures.filter(
                 Q(nom__icontains=recherche)
                 | Q(localisation__icontains=recherche)
-                | Q(description__icontains=recherche)
+                | Q(statut__icontains=recherche)
             )
 
         if localisation:
             cultures = cultures.filter(localisation__icontains=localisation)
 
         if date_debut:
-            cultures = cultures.filter(date_plantation__gte=date_debut)
+            cultures = cultures.filter(date_semis__gte=date_debut)
 
         if date_fin:
-            cultures = cultures.filter(date_plantation__lte=date_fin)
+            cultures = cultures.filter(date_semis__lte=date_fin)
 
-        tri = params.get("sort", "date_modification")
+        tri = params.get("sort", "date_semis")
         ordre = params.get("order", "desc")
-        champ_tri = CultureService.TRI_AUTORISE.get(tri, "date_modification")
+        champ_tri = CultureService.TRI_AUTORISE.get(tri, "date_semis")
 
         if ordre == "asc":
             cultures = cultures.order_by(champ_tri)
@@ -115,17 +116,14 @@ class CultureService:
     def modifier_culture(utilisateur, culture, formulaire):
         type_utilisateur = utilisateur.get_type_utilisateur()
 
-        if type_utilisateur == "agronome":
-            raise PermissionDenied("Accès refusé à cette culture.")
+        if type_utilisateur != "agriculteur":
+            raise PermissionDenied("Seul l'agriculteur peut modifier une culture.")
 
-        if type_utilisateur == "agriculteur" and culture.agriculteur != utilisateur.agriculteur:
+        if culture.agriculteur != utilisateur.agriculteur:
             raise PermissionDenied("Accès refusé à cette culture.")
 
         culture_modifiee = formulaire.save(commit=False)
-
-        if type_utilisateur == "agriculteur":
-            culture_modifiee.agriculteur = utilisateur.agriculteur
-
+        culture_modifiee.agriculteur = utilisateur.agriculteur
         culture_modifiee.pk = culture.pk
         culture_modifiee.full_clean()
         culture_modifiee.save()
@@ -134,10 +132,10 @@ class CultureService:
 
     @staticmethod
     def supprimer_culture(utilisateur, culture):
-        if (
-            utilisateur.get_type_utilisateur() == "agriculteur"
-            and culture.agriculteur != utilisateur.agriculteur
-        ):
+        if utilisateur.get_type_utilisateur() != "agriculteur":
+            raise PermissionDenied("Seul l'agriculteur peut supprimer une culture.")
+
+        if culture.agriculteur != utilisateur.agriculteur:
             raise PermissionDenied("Accès refusé à cette culture.")
 
         culture.delete()

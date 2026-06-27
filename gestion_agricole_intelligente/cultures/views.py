@@ -40,6 +40,9 @@ def liste_cultures(request):
 
 @login_required
 def ajouter_culture(request):
+    if request.user.get_type_utilisateur() != "agriculteur":
+        raise PermissionDenied("Seul l'agriculteur peut créer une culture.")
+
     formulaire = CultureForm(utilisateur=request.user)
 
     if request.method == "POST":
@@ -79,6 +82,9 @@ def consulter_culture(request, pk):
 
 @login_required
 def modifier_culture(request, pk):
+    if request.user.get_type_utilisateur() != "agriculteur":
+        raise PermissionDenied("Seul l'agriculteur peut modifier une culture.")
+
     try:
         culture = CultureService.obtenir_culture(request.user, pk)
     except Culture.DoesNotExist:
@@ -114,6 +120,9 @@ def modifier_culture(request, pk):
 
 @login_required
 def supprimer_culture(request, pk):
+    if request.user.get_type_utilisateur() != "agriculteur":
+        raise PermissionDenied("Seul l'agriculteur peut supprimer une culture.")
+
     try:
         culture = CultureService.obtenir_culture(request.user, pk)
     except Culture.DoesNotExist:

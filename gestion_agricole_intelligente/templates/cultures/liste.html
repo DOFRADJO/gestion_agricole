@@ -8,12 +8,14 @@
 
     <div class="d-flex flex-column flex-md-row justify-content-between gap-3 align-items-start mb-4">
         <div>
-            <h3 class="mb-1">Mes cultures</h3>
+            <h3 class="mb-1">Cultures</h3>
             <p class="text-muted mb-0">{{ total }} culture{{ total|pluralize }} trouvée{{ total|pluralize }}</p>
         </div>
+        {% if request.user.get_type_utilisateur == 'agriculteur' %}
         <a href="{% url 'cultures:ajouter' %}" class="btn btn-primary">
             <i class="bi bi-plus-lg me-2"></i>Nouvelle culture
         </a>
+        {% endif %}
     </div>
 
     <div class="card shadow-sm mb-4">
@@ -21,18 +23,18 @@
             <form method="get" class="row gy-3 gx-3 align-items-end">
                 <div class="col-md-4">
                     <label class="form-label">Rechercher</label>
-                    <input type="search" name="q" value="{{ recherche }}" class="form-control" placeholder="Nom, localisation ou description">
+                    <input type="search" name="q" value="{{ recherche }}" class="form-control" placeholder="Nom ou localisation">
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">Localisation</label>
                     <input type="search" name="localisation" value="{{ localisation }}" class="form-control" placeholder="Région, ville, ferme">
                 </div>
                 <div class="col-md-2">
-                    <label class="form-label">Début plantation</label>
+                    <label class="form-label">Début semis</label>
                     <input type="date" name="date_debut" value="{{ date_debut }}" class="form-control">
                 </div>
                 <div class="col-md-2">
-                    <label class="form-label">Fin plantation</label>
+                    <label class="form-label">Fin semis</label>
                     <input type="date" name="date_fin" value="{{ date_fin }}" class="form-control">
                 </div>
                 <div class="col-md-1 d-grid">
@@ -49,15 +51,15 @@
                     <label class="form-label small text-uppercase text-muted">Tri</label>
                     <div class="d-flex gap-2">
                         <select class="form-select w-auto" onchange="location = this.value;">
-                            <option value="?sort=date_modification&order=desc{% if query_params %}&{{ query_params }}{% endif %}" {% if tri == 'date_modification' and ordre == 'desc' %}selected{% endif %}>Date la plus récente</option>
-                            <option value="?sort=date_modification&order=asc{% if query_params %}&{{ query_params }}{% endif %}" {% if tri == 'date_modification' and ordre == 'asc' %}selected{% endif %}>Date la plus ancienne</option>
+                            <option value="?sort=date_semis&order=desc{% if query_params %}&{{ query_params }}{% endif %}" {% if tri == 'date_semis' and ordre == 'desc' %}selected{% endif %}>Date semis la plus récente</option>
+                            <option value="?sort=date_semis&order=asc{% if query_params %}&{{ query_params }}{% endif %}" {% if tri == 'date_semis' and ordre == 'asc' %}selected{% endif %}>Date semis la plus ancienne</option>
                             <option value="?sort=nom&order=asc{% if query_params %}&{{ query_params }}{% endif %}" {% if tri == 'nom' and ordre == 'asc' %}selected{% endif %}>Nom A→Z</option>
                             <option value="?sort=nom&order=desc{% if query_params %}&{{ query_params }}{% endif %}" {% if tri == 'nom' and ordre == 'desc' %}selected{% endif %}>Nom Z→A</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-md-4 text-md-end">
-                    <span class="badge bg-secondary">Tri : {{ tri|default:'date_modification' }} / {{ ordre|default:'desc' }}</span>
+                    <span class="badge bg-secondary">Tri : {{ tri|default:'date_semis' }} / {{ ordre|default:'desc' }}</span>
                 </div>
             </div>
 
@@ -68,7 +70,7 @@
                             <th>Nom</th>
                             <th>Agriculteur</th>
                             <th>Superficie</th>
-                            <th>Date plantation</th>
+                            <th>Date semis</th>
                             <th>Localisation</th>
                             <th class="text-end">Actions</th>
                         </tr>
@@ -79,12 +81,14 @@
                                 <td><a href="{% url 'cultures:detail' culture.pk %}" class="text-decoration-none">{{ culture.nom }}</a></td>
                                 <td>{{ culture.agriculteur.get_full_name }}</td>
                                 <td>{{ culture.superficie }} ha</td>
-                                <td>{{ culture.date_plantation }}</td>
+                                <td>{{ culture.date_semis }}</td>
                                 <td>{{ culture.localisation|title }}</td>
                                 <td class="text-end">
                                     <a href="{% url 'cultures:detail' culture.pk %}" class="btn btn-sm btn-outline-primary me-1" title="Voir">Voir</a>
+                                    {% if request.user.get_type_utilisateur == 'agriculteur' and culture.agriculteur == request.user.agriculteur %}
                                     <a href="{% url 'cultures:modifier' culture.pk %}" class="btn btn-sm btn-outline-secondary me-1" title="Modifier">Modifier</a>
                                     <a href="{% url 'cultures:supprimer' culture.pk %}" class="btn btn-sm btn-outline-danger" title="Supprimer">Supprimer</a>
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% empty %}

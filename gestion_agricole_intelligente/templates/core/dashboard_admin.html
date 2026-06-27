@@ -68,7 +68,7 @@
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <div>
                                 <strong>{{ c.nom }}</strong>
-                                <div class="small text-muted">{{ c.localisation }} — {{ c.date_creation|date:"Y-m-d H:i" }}</div>
+                                <div class="small text-muted">{{ c.localisation }} — Semis le {{ c.date_semis|date:"Y-m-d" }}</div>
                             </div>
                             <a href="{% url 'cultures:detail' c.pk %}" class="btn btn-sm btn-outline-primary">Voir</a>
                         </li>

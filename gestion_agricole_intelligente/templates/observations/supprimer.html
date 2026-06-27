@@ -1,0 +1,20 @@
+{% extends "base/base.html" %}
+
+{% block title %}Supprimer observation{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    {% include "components/breadcrumb.html" with section="Observations" title="Supprimer" %}
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <p>Confirmer la suppression de l'observation pour la culture <strong>{{ observation.culture.nom }}</strong> ?</p>
+            <form method="post">
+                {% csrf_token %}
+                <a href="{% url 'observations:detail' observation.pk %}" class="btn btn-outline-secondary">Annuler</a>
+                <button type="submit" class="btn btn-danger">Supprimer</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

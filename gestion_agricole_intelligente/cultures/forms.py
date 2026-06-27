@@ -14,9 +14,9 @@ class CultureForm(forms.ModelForm):
             "agriculteur",
             "nom",
             "superficie",
-            "date_plantation",
+            "date_semis",
             "localisation",
-            "description",
+            "statut",
         ]
         widgets = {
             "agriculteur": forms.Select(
@@ -36,7 +36,7 @@ class CultureForm(forms.ModelForm):
                     "min": "0.01",
                 }
             ),
-            "date_plantation": forms.DateInput(
+            "date_semis": forms.DateInput(
                 format="%Y-%m-%d",
                 attrs={
                     "class": "form-control",
@@ -49,11 +49,10 @@ class CultureForm(forms.ModelForm):
                     "placeholder": "Ville, région ou ferme",
                 }
             ),
-            "description": forms.Textarea(
+            "statut": forms.TextInput(
                 attrs={
                     "class": "form-control",
-                    "rows": 4,
-                    "placeholder": "Description de la culture",
+                    "placeholder": "Statut de la culture",
                 }
             ),
         }
@@ -61,9 +60,9 @@ class CultureForm(forms.ModelForm):
             "agriculteur": "Agriculteur",
             "nom": "Nom de la culture",
             "superficie": "Superficie (ha)",
-            "date_plantation": "Date de plantation",
+            "date_semis": "Date de semis",
             "localisation": "Localisation",
-            "description": "Description",
+            "statut": "Statut",
         }
 
     def __init__(self, *args, utilisateur=None, **kwargs):
@@ -71,9 +70,9 @@ class CultureForm(forms.ModelForm):
         self.utilisateur = utilisateur
 
         # Ensure date field initial value is formatted for HTML date inputs (YYYY-MM-DD)
-        if self.instance and getattr(self.instance, 'date_plantation', None):
+        if self.instance and getattr(self.instance, 'date_semis', None):
             try:
-                self.initial.setdefault('date_plantation', self.instance.date_plantation.strftime('%Y-%m-%d'))
+                self.initial.setdefault('date_semis', self.instance.date_semis.strftime('%Y-%m-%d'))
             except Exception:
                 pass
 
@@ -101,10 +100,10 @@ class CultureForm(forms.ModelForm):
 
     def clean(self):
         super().clean()
-        date_plantation = self.cleaned_data.get("date_plantation")
-        if date_plantation and date_plantation > date.today():
+        date_semis = self.cleaned_data.get("date_semis")
+        if date_semis and date_semis > date.today():
             raise ValidationError(
                 {
-                    "date_plantation": "La date de plantation ne peut pas être dans le futur."
+                    "date_semis": "La date de semis ne peut pas être dans le futur."
                 }
             )

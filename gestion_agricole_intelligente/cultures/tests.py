@@ -23,9 +23,9 @@ class CultureServiceTest(TestCase):
             agriculteur=self.agriculteur,
             nom="Tomates",
             superficie=1.5,
-            date_plantation="2025-06-01",
+            date_semis="2025-06-01",
             localisation="Champ central",
-            description="Tomates bio",
+            statut="En cours",
         )
 
     def test_creer_culture_pour_agriculteur(self):
@@ -33,9 +33,9 @@ class CultureServiceTest(TestCase):
             data={
                 "nom": "Maïs",
                 "superficie": 2.5,
-                "date_plantation": "2025-08-01",
+                "date_semis": "2025-08-01",
                 "localisation": "Champ nord",
-                "description": "Maïs de saison",
+                "statut": "En cours",
             },
             utilisateur=self.utilisateur,
         )
@@ -57,9 +57,9 @@ class CultureServiceTest(TestCase):
             data={
                 "nom": "Tomates cerises",
                 "superficie": 1.5,
-                "date_plantation": "2025-06-01",
+                "date_semis": "2025-06-01",
                 "localisation": "Champ central",
-                "description": "Tomates bio",
+                "statut": "En progression",
             },
             instance=self.culture,
             utilisateur=self.utilisateur,
@@ -71,6 +71,7 @@ class CultureServiceTest(TestCase):
             formulaire,
         )
         self.assertEqual(culture_modifiee.nom, "Tomates cerises")
+        self.assertEqual(culture_modifiee.statut, "En progression")
 
     def test_supprimer_culture(self):
         CultureService.supprimer_culture(self.utilisateur, self.culture)
@@ -89,9 +90,9 @@ class CultureServiceTest(TestCase):
             data={
                 "nom": "Tomates rouges",
                 "superficie": 1.5,
-                "date_plantation": "2025-06-01",
+                "date_semis": "2025-06-01",
                 "localisation": "Champ central",
-                "description": "Tomates bio",
+                "statut": "En cours",
             },
             instance=self.culture,
             utilisateur=agronome_user,
@@ -125,9 +126,9 @@ class CultureViewsTest(TestCase):
             {
                 "nom": "Laitue",
                 "superficie": 0.8,
-                "date_plantation": "2025-09-01",
+                "date_semis": "2025-09-01",
                 "localisation": "Serre ouest",
-                "description": "Laitues fraîches",
+                "statut": "En cours",
             },
             follow=True,
         )
@@ -139,33 +140,34 @@ class CultureViewsTest(TestCase):
             agriculteur=self.utilisateur.agriculteur,
             nom="Carottes",
             superficie=1.2,
-            date_plantation="2025-07-01",
+            date_semis="2025-07-01",
             localisation="Champ sud",
-            description="Carottes locales",
+            statut="En cours",
         )
         response = self.client.post(
             reverse("cultures:modifier", args=[culture.pk]),
             {
                 "nom": "Carottes bio",
                 "superficie": 1.2,
-                "date_plantation": "2025-07-01",
+                "date_semis": "2025-07-01",
                 "localisation": "Champ sud",
-                "description": "Carottes locales",
+                "statut": "En progression",
             },
             follow=True,
         )
         self.assertEqual(response.status_code, 200)
         culture.refresh_from_db()
         self.assertEqual(culture.nom, "Carottes bio")
+        self.assertEqual(culture.statut, "En progression")
 
     def test_supprimer_culture_via_vue(self):
         culture = Culture.objects.create(
             agriculteur=self.utilisateur.agriculteur,
             nom="Courgette",
             superficie=0.9,
-            date_plantation="2025-07-15",
+            date_semis="2025-07-15",
             localisation="Serre est",
-            description="Courgettes d'été",
+            statut="En cours",
         )
         response = self.client.post(
             reverse("cultures:supprimer", args=[culture.pk]),
@@ -173,3 +175,4 @@ class CultureViewsTest(TestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertFalse(Culture.objects.filter(pk=culture.pk).exists())
+

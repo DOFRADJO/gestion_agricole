@@ -23,23 +23,15 @@
                         <dt class="col-sm-4 text-muted">Superficie</dt>
                         <dd class="col-sm-8">{{ culture.superficie }} ha</dd>
 
-                        <dt class="col-sm-4 text-muted">Date de plantation</dt>
-                        <dd class="col-sm-8">{{ culture.date_plantation }}</dd>
+                        <dt class="col-sm-4 text-muted">Date de semis</dt>
+                        <dd class="col-sm-8">{{ culture.date_semis }}</dd>
+
+                        <dt class="col-sm-4 text-muted">Statut</dt>
+                        <dd class="col-sm-8">{{ culture.statut }}</dd>
 
                         <dt class="col-sm-4 text-muted">Age de la culture</dt>
                         <dd class="col-sm-8">{{ culture.age_en_jours }} jours</dd>
-
-                        <dt class="col-sm-4 text-muted">Créée le</dt>
-                        <dd class="col-sm-8">{{ culture.date_creation|date:"d/m/Y H:i" }}</dd>
-
-                        <dt class="col-sm-4 text-muted">Dernière modification</dt>
-                        <dd class="col-sm-8">{{ culture.date_modification|date:"d/m/Y H:i" }}</dd>
                     </dl>
-
-                    <div class="mt-4">
-                        <h6>Description</h6>
-                        <p class="text-muted">{{ culture.description|default:'Aucune description fournie.' }}</p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -48,12 +40,14 @@
                 <div class="card-body">
                     <h5 class="card-title">Actions rapides</h5>
                     <div class="d-grid gap-2">
+                        {% if request.user.get_type_utilisateur == 'agriculteur' and culture.agriculteur == request.user.agriculteur %}
                         <a href="{% url 'cultures:modifier' culture.pk %}" class="btn btn-outline-primary btn-sm">
                             <i class="bi bi-pencil-square me-2"></i>Modifier
                         </a>
                         <a href="{% url 'cultures:supprimer' culture.pk %}" class="btn btn-outline-danger btn-sm">
                             <i class="bi bi-trash me-2"></i>Supprimer
                         </a>
+                        {% endif %}
                         <a href="{% url 'cultures:liste' %}" class="btn btn-outline-secondary btn-sm">
                             <i class="bi bi-arrow-left me-2"></i>Retour à la liste
                         </a>

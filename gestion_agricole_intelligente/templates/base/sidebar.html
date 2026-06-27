@@ -33,6 +33,7 @@
                     <span class="nav-link-text">Dashboard</span>
                 </a>
             </li>
+            {% if user_type != 'administrateur' %}
             <li class="nav-item mb-1">
                 <a class="nav-link d-flex align-items-center" href="{% url 'cultures:liste' %}" title="Cultures" data-bs-toggle="tooltip" data-bs-placement="right">
                     <span class="nav-link-icon"><i class="bi bi-seedling"></i></span>
@@ -40,7 +41,7 @@
                 </a>
             </li>
             <li class="nav-item mb-1">
-                <a class="nav-link disabled d-flex align-items-center" href="#" tabindex="-1" aria-disabled="true" title="Observations">
+                <a class="nav-link d-flex align-items-center" href="{% url 'observations:liste' %}" title="Observations" data-bs-toggle="tooltip" data-bs-placement="right">
                     <span class="nav-link-icon"><i class="bi bi-water"></i></span>
                     <span class="nav-link-text">Observations</span>
                 </a>
@@ -57,6 +58,7 @@
                     <span class="nav-link-text">Recommandations</span>
                 </a>
             </li>
+            {% endif %}
             {% if user_type == 'administrateur' %}
             <li class="nav-item mb-1">
                 <a class="nav-link d-flex align-items-center" href="/admin/" title="Administration" data-bs-toggle="tooltip" data-bs-placement="right">

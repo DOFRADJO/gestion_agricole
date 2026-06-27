@@ -332,6 +332,13 @@ Voir les fichiers dans le dossier `docs/` :
 - `utilisateurs.md` - Gestion des utilisateurs
 - `tests.md` - Stratégie de tests
 
+## Observations
+
+Le module `observations` (CU3) permet d'enregistrer et gérer des relevés liés aux cultures.
+
+- Documentation détaillée : [docs/observations.md](docs/observations.md)
+
+
 ## 🔧 Commandes utiles
 
 ### Créer un superutilisateur (admin Django)

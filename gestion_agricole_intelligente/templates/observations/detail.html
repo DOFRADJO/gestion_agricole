@@ -1,0 +1,24 @@
+{% extends "base/base.html" %}
+
+{% block title %}Détail observation{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    {% include "components/breadcrumb.html" with section="Observations" title="Détail" %}
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h5>{{ observation.culture.nom }}</h5>
+            <p class="text-muted">Observé le {{ observation.date_observation }}</p>
+            <p>{{ observation.description }}</p>
+            <div class="mt-4">
+                {% if request.user.get_type_utilisateur == 'agriculteur' and observation.culture.agriculteur == request.user.agriculteur %}
+                <a href="{% url 'observations:modifier' observation.pk %}" class="btn btn-outline-secondary">Modifier</a>
+                <a href="{% url 'observations:supprimer' observation.pk %}" class="btn btn-outline-danger">Supprimer</a>
+                {% endif %}
+                <a href="{% url 'observations:liste' %}" class="btn btn-link">Retour</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
