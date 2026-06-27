@@ -1,0 +1,92 @@
+{% load static %}
+{% with user_type=request.user.get_type_utilisateur %}
+<aside class="sidebar bg-white border-end" id="sidebarMenu">
+    <div class="sidebar-mobile-header d-flex d-lg-none align-items-center justify-content-between px-4 py-3 border-bottom">
+        <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-bar-chart-fill fs-4 text-primary"></i>
+            <div>
+                <h5 class="mb-0">GAI</h5>
+                <small class="text-muted">Gestion Agricole</small>
+            </div>
+        </div>
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="sidebarCloseButton" aria-label="Fermer">
+            <i class="bi bi-x"></i>
+        </button>
+    </div>
+    <div class="sidebar-body px-0 py-3">
+        <div class="sidebar-profile px-4 mb-4">
+            <div class="d-flex align-items-center gap-3">
+                <div class="avatar-lg bg-primary text-white rounded-circle d-flex align-items-center justify-content-center">
+                    {{ request.user.first_name|first|default:request.user.email|slice:":1"|upper }}
+                </div>
+                <div>
+                    <h6 class="mb-0">{{ request.user.get_full_name }}</h6>
+                    <small class="text-muted text-capitalize">{{ user_type }}</small>
+                </div>
+            </div>
+        </div>
+
+        <ul class="nav nav-pills flex-column mb-4 px-3">
+            <li class="nav-item mb-1">
+                <a class="nav-link d-flex align-items-center" href="{% if user_type == 'administrateur' %}{% url 'core:dashboard_admin' %}{% elif user_type == 'agronome' %}{% url 'core:dashboard_agronome' %}{% else %}{% url 'core:dashboard_agriculteur' %}{% endif %}" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <span class="nav-link-icon"><i class="bi bi-speedometer2"></i></span>
+                    <span class="nav-link-text">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item mb-1">
+                <a class="nav-link d-flex align-items-center" href="{% url 'cultures:liste' %}" title="Cultures" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <span class="nav-link-icon"><i class="bi bi-seedling"></i></span>
+                    <span class="nav-link-text">Cultures</span>
+                </a>
+            </li>
+            <li class="nav-item mb-1">
+                <a class="nav-link disabled d-flex align-items-center" href="#" tabindex="-1" aria-disabled="true" title="Observations">
+                    <span class="nav-link-icon"><i class="bi bi-water"></i></span>
+                    <span class="nav-link-text">Observations</span>
+                </a>
+            </li>
+            <li class="nav-item mb-1">
+                <a class="nav-link disabled d-flex align-items-center" href="#" tabindex="-1" aria-disabled="true" title="Prédictions">
+                    <span class="nav-link-icon"><i class="bi bi-bar-chart-line"></i></span>
+                    <span class="nav-link-text">Prédictions</span>
+                </a>
+            </li>
+            <li class="nav-item mb-1">
+                <a class="nav-link disabled d-flex align-items-center" href="#" tabindex="-1" aria-disabled="true" title="Recommandations">
+                    <span class="nav-link-icon"><i class="bi bi-lightbulb"></i></span>
+                    <span class="nav-link-text">Recommandations</span>
+                </a>
+            </li>
+            {% if user_type == 'administrateur' %}
+            <li class="nav-item mb-1">
+                <a class="nav-link d-flex align-items-center" href="/admin/" title="Administration" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <span class="nav-link-icon"><i class="bi bi-gear"></i></span>
+                    <span class="nav-link-text">Administration</span>
+                </a>
+            </li>
+            {% endif %}
+            <li class="nav-item mt-4">
+                <span class="sidebar-section-title text-uppercase text-muted small px-3">Compte</span>
+            </li>
+            <li class="nav-item mb-1">
+                <a class="nav-link d-flex align-items-center" href="#" title="Mon profil" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <span class="nav-link-icon"><i class="bi bi-person"></i></span>
+                    <span class="nav-link-text">Mon profil</span>
+                </a>
+            </li>
+            <li class="nav-item mb-1">
+                <a class="nav-link d-flex align-items-center" href="#" title="Paramètres" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <span class="nav-link-icon"><i class="bi bi-sliders"></i></span>
+                    <span class="nav-link-text">Paramètres</span>
+                </a>
+            </li>
+            <li class="nav-item mb-1">
+                <a class="nav-link text-danger d-flex align-items-center" href="{% url 'authentication:deconnexion' %}" title="Déconnexion" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <span class="nav-link-icon"><i class="bi bi-box-arrow-right"></i></span>
+                    <span class="nav-link-text">Déconnexion</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>
+{% endwith %}

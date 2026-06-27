@@ -1,3 +1,6 @@
+from datetime import date
+
+from django.core.exceptions import ValidationError
 from django.db import models
 
 from utilisateurs.models import Agriculteur
@@ -5,7 +8,7 @@ from utilisateurs.models import Agriculteur
 
 class Culture(models.Model):
     """
-    Représente une culture agricole.
+    Représente une culture agricole associée à un agriculteur.
     """
 
     agriculteur = models.ForeignKey(
@@ -51,7 +54,30 @@ class Culture(models.Model):
     class Meta:
         verbose_name = "Culture"
         verbose_name_plural = "Cultures"
-        ordering = ["-date_creation"]
+        ordering = ["-date_modification"]
+        indexes = [
+            models.Index(fields=["nom"]),
+            models.Index(fields=["date_plantation"]),
+            models.Index(fields=["localisation"]),
+        ]
+        unique_together = ("agriculteur", "nom")
 
     def __str__(self):
-        return self.nom
+        return f"{self.nom} — {self.localisation}"
+
+    def clean(self):
+        if self.superficie <= 0:
+            raise ValidationError({"superficie": "La superficie doit être supérieure à zéro."})
+
+        if self.date_plantation and self.date_plantation > date.today():
+            raise ValidationError(
+                {"date_plantation": "La date de plantation ne peut pas être dans le futur."}
+            )
+
+    def age_en_jours(self):
+        if not self.date_plantation:
+            return 0
+        return (date.today() - self.date_plantation).days
+
+    def localisation_complete(self):
+        return self.localisation.title()

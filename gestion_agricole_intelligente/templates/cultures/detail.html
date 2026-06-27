@@ -1,0 +1,66 @@
+{% extends "base/base.html" %}
+
+{% block title %}Détails de la culture{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    {% include "components/breadcrumb.html" with section="Cultures" title=culture.nom %}
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-4">
+                        <div>
+                            <h3 class="h5 mb-1">{{ culture.nom }}</h3>
+                            <p class="text-muted mb-0">{{ culture.localisation|title }}</p>
+                        </div>
+                        <span class="badge bg-success text-uppercase">Culture</span>
+                    </div>
+                    <dl class="row">
+                        <dt class="col-sm-4 text-muted">Agriculteur</dt>
+                        <dd class="col-sm-8">{{ culture.agriculteur.get_full_name }}</dd>
+
+                        <dt class="col-sm-4 text-muted">Superficie</dt>
+                        <dd class="col-sm-8">{{ culture.superficie }} ha</dd>
+
+                        <dt class="col-sm-4 text-muted">Date de plantation</dt>
+                        <dd class="col-sm-8">{{ culture.date_plantation }}</dd>
+
+                        <dt class="col-sm-4 text-muted">Age de la culture</dt>
+                        <dd class="col-sm-8">{{ culture.age_en_jours }} jours</dd>
+
+                        <dt class="col-sm-4 text-muted">Créée le</dt>
+                        <dd class="col-sm-8">{{ culture.date_creation|date:"d/m/Y H:i" }}</dd>
+
+                        <dt class="col-sm-4 text-muted">Dernière modification</dt>
+                        <dd class="col-sm-8">{{ culture.date_modification|date:"d/m/Y H:i" }}</dd>
+                    </dl>
+
+                    <div class="mt-4">
+                        <h6>Description</h6>
+                        <p class="text-muted">{{ culture.description|default:'Aucune description fournie.' }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card shadow-sm bg-light">
+                <div class="card-body">
+                    <h5 class="card-title">Actions rapides</h5>
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'cultures:modifier' culture.pk %}" class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-pencil-square me-2"></i>Modifier
+                        </a>
+                        <a href="{% url 'cultures:supprimer' culture.pk %}" class="btn btn-outline-danger btn-sm">
+                            <i class="bi bi-trash me-2"></i>Supprimer
+                        </a>
+                        <a href="{% url 'cultures:liste' %}" class="btn btn-outline-secondary btn-sm">
+                            <i class="bi bi-arrow-left me-2"></i>Retour à la liste
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

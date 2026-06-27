@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Gestion Agricole Intelligente{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% block css %}{% endblock %}
+</head>
+
+<body class="bg-light">
+    {% if user.is_authenticated %}
+    <div class="app-shell d-flex min-vh-100">
+        {% include 'base/sidebar.html' %}
+        <div class="sidebar-backdrop"></div>
+        <div class="content-shell flex-grow-1 d-flex flex-column">
+            {% include 'base/navbar.html' %}
+            <main class="main-content px-4 py-4">
+    {% else %}
+    <div class="auth-shell min-vh-100 d-flex align-items-center justify-content-center bg-gradient">
+        <main class="auth-content w-100">
+    {% endif %}
+                {% include 'base/messages.html' %}
+                {% block content %}{% endblock %}
+        </main>
+    {% if user.is_authenticated %}
+            {% include 'base/footer.html' %}
+        </div>
+    </div>
+    {% else %}
+    </div>
+    {% endif %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+            toastElList.forEach(function (toastEl) {
+                var toast = new bootstrap.Toast(toastEl)
+                toast.show()
+            })
+
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+                new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+
+            var sidebar = document.querySelector('.sidebar')
+            if (!sidebar) {
+                return
+            }
+
+            var collapsedClass = 'sidebar-collapsed'
+            var sidebarOpenClass = 'sidebar-open'
+            var sidebarCollapseButton = document.getElementById('sidebarCollapseButton')
+            var sidebarToggleButton = document.getElementById('sidebarToggleButton')
+            var sidebarCloseButton = document.getElementById('sidebarCloseButton')
+            var sidebarBackdrop = document.querySelector('.sidebar-backdrop')
+
+            if (localStorage.getItem(collapsedClass) === 'true') {
+                document.body.classList.add(collapsedClass)
+            }
+
+            function isMobileViewport() {
+                return window.innerWidth < 992
+            }
+
+            if (sidebarCollapseButton) {
+                sidebarCollapseButton.addEventListener('click', function () {
+                    if (isMobileViewport()) {
+                        document.body.classList.toggle(sidebarOpenClass)
+                    } else {
+                        document.body.classList.toggle(collapsedClass)
+                        localStorage.setItem(collapsedClass, document.body.classList.contains(collapsedClass))
+                    }
+                })
+            }
+
+            if (sidebarToggleButton) {
+                sidebarToggleButton.addEventListener('click', function () {
+                    document.body.classList.add(sidebarOpenClass)
+                })
+            }
+
+            if (sidebarCloseButton) {
+                sidebarCloseButton.addEventListener('click', function () {
+                    document.body.classList.remove(sidebarOpenClass)
+                })
+            }
+
+            if (sidebarBackdrop) {
+                sidebarBackdrop.addEventListener('click', function () {
+                    document.body.classList.remove(sidebarOpenClass)
+                })
+            }
+        })
+    </script>
+    {% block javascript %}{% endblock %}
+</body>
+
+</html>

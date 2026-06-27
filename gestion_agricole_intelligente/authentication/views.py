@@ -4,7 +4,6 @@ from django.shortcuts import redirect, render
 from .forms import ConnexionForm
 from services.authentication_service import AuthenticationService
 
-
 def connexion(request):
     """
     Affiche le formulaire de connexion.
@@ -60,6 +59,10 @@ def connexion(request):
 
                 return redirect("authentication:connexion")
 
+            formulaire.add_error(
+                None,
+                "Adresse e-mail ou mot de passe incorrect."
+            )
             messages.error(
                 request,
                 "Adresse e-mail ou mot de passe incorrect."
@@ -72,6 +75,7 @@ def connexion(request):
             "form": formulaire,
         },
     )
+    
 
 
 def deconnexion(request):
@@ -80,5 +84,9 @@ def deconnexion(request):
     """
 
     AuthenticationService.deconnecter(request)
+    messages.success(
+        request,
+        "Vous avez été déconnecté avec succès."
+    )
 
     return redirect("authentication:connexion")

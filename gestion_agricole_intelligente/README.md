@@ -123,13 +123,68 @@ L'application est accessible à : `http://127.0.0.1:8000`
 
 - **Administrateur** : Accès complet à l'application, gestion des utilisateurs
 - **Agronome** : Accès à la gestion des cultures et observations
-- **Agriculteur** : Accès aux prédictions et recommandations
+- **Agriculteur** : Accès aux cultures, prédictions et recommandations
 
 ### Créer d'autres utilisateurs
 
 ```bash
 python manage.py shell
 ```
+
+```python
+from utilisateurs.models import Utilisateur
+from services.utilisateur_service import UtilisateurService
+
+# Créer un utilisateur de base
+utilisateur = Utilisateur.objects.create_user(
+    email="agronome@example.com",
+    username="agronome",
+    first_name="Jean",
+    last_name="Dupont",
+    password="password123"
+)
+
+# Lui assigner un profil
+UtilisateurService.creer_agronome(utilisateur)
+# ou
+UtilisateurService.creer_agriculteur(utilisateur)
+# ou
+UtilisateurService.creer_administrateur(utilisateur)
+```
+
+## 🌱 Gestion des cultures
+
+Le module Cultures permet :
+
+- Ajouter une culture
+- Modifier une culture
+- Supprimer une culture
+- Consulter une culture
+- Lister toutes les cultures
+- Rechercher, trier et filtrer les cultures
+- Utiliser la pagination pour naviguer dans les résultats
+- Vérifier la validation métier avant enregistrement
+- Confirmer la suppression avec un message clair
+
+### Utilisation
+
+1. Connectez-vous.
+2. Ouvrez le menu `Cultures`.
+3. Recherchez, filtrez ou triez les cultures.
+4. Cliquez sur `Nouvelle culture` pour ajouter une entrée.
+5. Consultez une culture, puis modifiez ou supprimez-la.
+
+### Autorisations
+
+- Les **agriculteurs** gèrent leurs propres cultures.
+- Les **administrateurs** voient toutes les cultures.
+- Les **agronomes** consultent les cultures en lecture.
+
+### Remarques
+
+- Les menus sont dynamiques selon le type d'utilisateur.
+- Le dashboard conserve le même layout pour les trois profils.
+- Les pages sont responsives et adaptées mobile.
 
 ```python
 from utilisateurs.models import Utilisateur

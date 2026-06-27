@@ -1,5 +1,309 @@
-body{
+:root {
+    color-scheme: light;
+    --color-bg: #f4f6fb;
+    --color-surface: #ffffff;
+    --color-border: #e7eaf3;
+    --color-muted: #6b7280;
+    --color-primary: #0d6efd;
+    --color-secondary: #64748b;
+}
 
-    background:#f5f7fa;
+body {
+    background: var(--color-bg);
+    color: #1f2937;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
 
+.bg-gradient {
+    background: linear-gradient(135deg, #eff4ff 0%, #f8fafc 100%);
+}
+
+.auth-shell {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.auth-content {
+    max-width: 540px;
+    margin: 0 auto;
+}
+
+.auth-logo img {
+    display: inline-block;
+}
+
+.sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    border-right: 1px solid rgba(15, 23, 42, 0.08);
+    transition: width 0.25s ease-in-out, transform 0.25s ease-in-out;
+    overflow: hidden;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-body {
+    padding-top: 0;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.sidebar-profile {
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    padding: 1.25rem 1rem 1rem;
+}
+
+.sidebar-profile .avatar-lg {
+    width: 56px;
+    height: 56px;
+    font-size: 1.15rem;
+}
+
+.sidebar-mobile-header {
+    display: none;
+}
+
+.sidebar .nav-link {
+    padding: 0.9rem 1rem;
+    color: #475569;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidebar .nav-link .nav-link-icon {
+    width: 2rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0.75rem;
+}
+
+.sidebar .nav-link .nav-link-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+    color: #0d6efd;
+    background-color: rgba(13, 110, 253, 0.08);
+    border-radius: 0.75rem;
+}
+
+.sidebar-section-title {
+    display: block;
+    margin-top: 1rem;
+}
+
+.sidebar-collapsed .sidebar {
+    width: 72px;
+}
+
+.sidebar-collapsed .sidebar-profile {
+    padding: 1rem 0.5rem;
+    text-align: center;
+}
+
+.sidebar-collapsed .sidebar-profile h6,
+.sidebar-collapsed .sidebar-profile small,
+.sidebar-collapsed .sidebar-section-title,
+.sidebar-collapsed .nav-link .nav-link-text {
+    display: none !important;
+}
+
+.sidebar-collapsed .sidebar .nav-link {
+    justify-content: center;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.sidebar-collapsed .sidebar .nav-link .nav-link-icon {
+    margin-right: 0;
+}
+
+.content-shell {
+    min-height: 100vh;
+    background: var(--color-bg);
+    transition: margin 0.25s ease-in-out, width 0.25s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-backdrop {
+    display: none;
+}
+
+.auth-content {
+    max-width: 500px;
+    width: 100%;
+    padding: 0 1rem;
+    min-width: 0;
+}
+
+.auth-shell .card {
+    width: 100%;
+    min-width: 0;
+}
+
+.auth-wrapper .card {
+    min-width: 0;
+}
+
+/* Authentication-specific isolated styles */
+.auth-shell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 1rem;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 480px;
+    min-width: 360px;
+    background: var(--color-surface);
+    border-radius: 1rem;
+}
+
+.auth-card .card-body {
+    padding: 1.25rem 1.25rem;
+}
+
+.auth-title {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+.auth-card label.form-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.auth-card .form-control,
+.auth-card .form-select,
+.auth-card textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.auth-card .btn {
+    width: 100%;
+}
+
+/* Ensure auth layout is not affected by sidebar/dash layout rules */
+.auth-shell .sidebar,
+.auth-shell .content-shell,
+.auth-shell .app-shell {
+    display: none !important;
+}
+
+@media (max-width: 991.98px) {
+    .app-shell {
+        position: relative;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 260px;
+        transform: translateX(-100%);
+        z-index: 1050;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.12);
+    }
+
+    body.sidebar-open .sidebar {
+        transform: translateX(0);
+    }
+
+    .sidebar-mobile-header {
+        display: flex;
+    }
+
+    .sidebar-body {
+        height: calc(100vh - 76px);
+    }
+
+    .sidebar-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.32);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease-in-out;
+        z-index: 1040;
+    }
+
+    body.sidebar-open .sidebar-backdrop {
+        display: block;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .content-shell {
+        min-height: 100vh;
+    }
+
+    .sidebar-collapsed .sidebar {
+        width: 260px;
+    }
+}
+
+.main-content {
+    min-height: calc(100vh - 80px);
+}
+
+.card {
+    border-radius: 1rem;
+}
+
+.card-header {
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.icon-shape {
+    width: 56px;
+    height: 56px;
+}
+
+.avatar,
+.avatar-lg {
+    width: 48px;
+    height: 48px;
+    font-size: 1rem;
+}
+
+.avatar-lg {
+    width: 60px;
+    height: 60px;
+    font-size: 1.2rem;
+}
+
+.footer {
+    background: #ffffff;
+}
+
+.table thead th {
+    border-bottom-width: 2px;
+}
+
+.table tbody tr:hover {
+    background: rgba(13, 110, 253, 0.03);
+}
+
+@media (max-width: 991px) {
+    .sidebar {
+        min-width: 100%;
+        width: 100%;
+    }
+
+    .main-content {
+        min-height: auto;
+    }
 }

@@ -11,14 +11,41 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-import environ
+import os
+
+# Optional dependency: django-environ. Provide a lightweight fallback when absent.
+try:
+    import environ
+    _HAS_ENV = True
+except ImportError:
+    environ = None
+    _HAS_ENV = False
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-env = environ.Env()
+if _HAS_ENV:
+    env = environ.Env()
+    environ.Env.read_env(BASE_DIR / ".env")
+else:
+    # Minimal fallback to read environment variables when django-environ is not installed.
+    class _SimpleEnv:
+        def __call__(self, key, default=None):
+            return os.environ.get(key, default)
 
-environ.Env.read_env(BASE_DIR / ".env")
+        def bool(self, key, default=False):
+            val = os.environ.get(key)
+            if val is None:
+                return default
+            return str(val).lower() in ("1", "true", "yes", "on")
+
+        def list(self, key, default=None):
+            val = os.environ.get(key)
+            if val is None:
+                return default or []
+            return [p.strip() for p in val.split(",") if p.strip()]
+
+    env = _SimpleEnv()
 
 
 

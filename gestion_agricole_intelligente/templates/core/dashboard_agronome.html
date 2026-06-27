@@ -1,23 +1,30 @@
 {% extends "base/base.html" %}
 
-{% block title %}
-Tableau de bord Agronome
-{% endblock %}
+{% block title %}Tableau de bord Agronome{% endblock %}
 
 {% block content %}
-
-<div class="container mt-5">
-
-    <h2>
-        Tableau de bord Agronome
-    </h2>
-
-    <hr>
-
-    <p>
-        Bienvenue {{ request.user.get_full_name }}.
-    </p>
-
+<div class="container-fluid">
+    <h2 class="h4 mb-3">Tableau de bord Agronome</h2>
+    <div class="row g-3">
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm">
+                <h6>Mes cultures suivies</h6>
+                <h3>{{ total_cultures }}</h3>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm">
+                <h6>Observations</h6>
+                <h3>{{ total_observations }}</h3>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm">
+                <h6>Prédictions</h6>
+                <h3>{{ total_predictions }}</h3>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

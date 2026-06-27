@@ -82,7 +82,7 @@ class AuthenticationViewsTest(TestCase):
             {"email": "nonexistent@test.com", "mot_de_passe": "password123"},
         )
         self.assertEqual(response.status_code, 200)
-        self.assertFormError(response, "form", None, None)
+        self.assertContains(response, "Adresse e-mail ou mot de passe incorrect.")
 
     def test_invalid_password_login_fails(self):
         """Un mot de passe invalide échoue la connexion."""
@@ -91,7 +91,7 @@ class AuthenticationViewsTest(TestCase):
             {"email": "admin@test.com", "mot_de_passe": "wrongpassword"},
         )
         self.assertEqual(response.status_code, 200)
-        self.assertFormError(response, "form", None, None)
+        self.assertContains(response, "Adresse e-mail ou mot de passe incorrect.")
 
     def test_logout_clears_session(self):
         """La déconnexion efface la session."""
@@ -99,6 +99,7 @@ class AuthenticationViewsTest(TestCase):
         response = self.client.get(reverse("authentication:deconnexion"), follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertNotIn("_auth_user_id", self.client.session)
+        self.assertContains(response, "Vous avez été déconnecté avec succès.")
 
 
 class AuthenticationServiceTest(TestCase):

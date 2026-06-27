@@ -1,0 +1,44 @@
+{% load static %}
+{% with user_type=request.user.get_type_utilisateur %}
+<nav class="navbar navbar-expand-lg navbar-white bg-white border-bottom px-4 py-3 shadow-sm sticky-top">
+    <div class="container-fluid">
+        <button class="btn btn-outline-secondary d-lg-none" type="button" id="sidebarToggleButton" aria-label="Ouvrir le menu">
+            <i class="bi bi-list"></i>
+        </button>
+        <button class="btn btn-outline-secondary d-none d-lg-inline-flex me-2" type="button" id="sidebarCollapseButton" aria-label="Basculer le menu">
+            <i class="bi bi-list"></i>
+        </button>
+        <a class="navbar-brand fw-bold text-primary" href="{% if user_type == 'administrateur' %}{% url 'core:dashboard_admin' %}{% elif user_type == 'agronome' %}{% url 'core:dashboard_agronome' %}{% else %}{% url 'core:dashboard_agriculteur' %}{% endif %}">
+            <span class="d-inline-flex align-items-center gap-2">
+                <i class="bi bi-bar-chart-fill fs-4"></i>
+                <span>Gestion Agricole Intelligente</span>
+            </span>
+        </a>
+
+        <div class="d-flex align-items-center gap-3">
+            <button class="btn btn-outline-secondary rounded-circle position-relative" type="button">
+                <i class="bi bi-bell"></i>
+                <span class="badge bg-danger position-absolute top-0 start-100 translate-middle badge-pill">3</span>
+            </button>
+
+            <div class="dropdown">
+                <a class="d-flex align-items-center text-decoration-none dropdown-toggle" href="#" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-2">
+                        {{ request.user.first_name|first|default:request.user.email|slice:":1"|upper }}
+                    </div>
+                    <div class="d-none d-sm-block text-start">
+                        <div class="fw-semibold">{{ request.user.get_full_name }}</div>
+                        <small class="text-muted text-capitalize">{{ user_type }}</small>
+                    </div>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userMenu">
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-person-circle me-2"></i>Mon profil</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Paramètres</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger" href="{% url 'authentication:deconnexion' %}"><i class="bi bi-box-arrow-right me-2"></i>Déconnexion</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+{% endwith %}

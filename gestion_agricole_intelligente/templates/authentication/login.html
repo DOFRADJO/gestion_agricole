@@ -1,58 +1,54 @@
 {% extends "base/base.html" %}
+{% load static %}
 
-{% block title %}
-Connexion
-{% endblock %}
+{% block title %}Connexion{% endblock %}
 
 {% block content %}
-
-<div class="container">
-
-    <div class="row justify-content-center mt-5">
-
-        <div class="col-md-5">
-
-            <div class="card shadow">
-
-                <div class="card-header text-center">
-
-                    <h3>
-                        Gestion Agricole Intelligente
-                    </h3>
-
-                    <p class="text-muted">
-
-                        Connexion
-
-                    </p>
-
+<div class="auth-wrapper py-5">
+    <div class="auth-shell min-vh-100 d-flex align-items-center justify-content-center">
+        <div class="auth-card card shadow-lg border-0 rounded-4 overflow-hidden">
+            <div class="card-body p-4 p-md-5">
+                <div class="text-center mb-4 mb-md-5">
+                    <div class="auth-logo mb-3">
+                        <img src="{% static 'images/logo.svg' %}" alt="Logo" height="56" />
+                    </div>
+                    <h1 class="h5 fw-bold mb-1 auth-title">Gestion Agricole Intelligente</h1>
+                    <p class="text-muted mb-0">Connectez-vous pour accéder à votre espace de gestion agricole.</p>
                 </div>
 
-                <div class="card-body">
+                <form method="post" novalidate>
+                    {% csrf_token %}
 
-                    <form method="post">
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger rounded-3">
+                            {{ form.non_field_errors|striptags }}
+                        </div>
+                    {% endif %}
 
-                        {% csrf_token %}
+                    {% for field in form %}
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.help_text %}
+                                <div class="form-text">{{ field.help_text }}</div>
+                            {% endif %}
+                            {% if field.errors %}
+                                <div class="invalid-feedback d-block">{{ field.errors|striptags }}</div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
 
-                        {{ form.as_p }}
-
-                        <button
-                            class="btn btn-success w-100">
-
-                            Se connecter
-
+                    <div class="d-grid mt-3">
+                        <button type="submit" class="btn btn-primary py-2 shadow-sm w-100">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Se connecter
                         </button>
-
-                    </form>
-
-                </div>
-
+                    </div>
+                </form>
             </div>
-
+            <div class="card-footer bg-white border-top py-3 text-center">
+                <small class="text-muted">Accédez à vos cultures, observations et recommandations en un clic.</small>
+            </div>
         </div>
-
     </div>
-
 </div>
-
 {% endblock %}

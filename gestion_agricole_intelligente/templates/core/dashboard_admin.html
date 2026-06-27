@@ -1,23 +1,93 @@
 {% extends "base/base.html" %}
 
-{% block title %}
-Tableau de bord Administrateur
-{% endblock %}
+{% block title %}Tableau de bord Administrateur{% endblock %}
 
 {% block content %}
 
-<div class="container mt-5">
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="h4 mb-0">Tableau de bord</h2>
+            <small class="text-muted">Bienvenue {{ request.user.get_full_name }}</small>
+        </div>
+    </div>
 
-    <h2>
-        Tableau de bord Administrateur
-    </h2>
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="card shadow-sm p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-1">Cultures</h6>
+                        <h3 class="mb-0">{{ total_cultures }}</h3>
+                    </div>
+                    <i class="bi bi-seedling fs-1 text-success"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow-sm p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-1">Agriculteurs</h6>
+                        <h3 class="mb-0">{{ total_agriculteurs }}</h3>
+                    </div>
+                    <i class="bi bi-people fs-1 text-primary"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow-sm p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-1">Agronomes</h6>
+                        <h3 class="mb-0">{{ total_agronomes }}</h3>
+                    </div>
+                    <i class="bi bi-person-badge fs-1 text-warning"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow-sm p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-1">Observations</h6>
+                        <h3 class="mb-0">{{ total_observations }}</h3>
+                    </div>
+                    <i class="bi bi-journal-text fs-1 text-secondary"></i>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <hr>
-
-    <p>
-        Bienvenue {{ request.user.get_full_name }}.
-    </p>
-
+    <div class="row g-3">
+        <div class="col-lg-8">
+            <div class="card shadow-sm p-3">
+                <h5>Activités récentes</h5>
+                <ul class="list-group list-group-flush mt-3">
+                    {% for c in recent_cultures %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>{{ c.nom }}</strong>
+                                <div class="small text-muted">{{ c.localisation }} — {{ c.date_creation|date:"Y-m-d H:i" }}</div>
+                            </div>
+                            <a href="{% url 'cultures:detail' c.pk %}" class="btn btn-sm btn-outline-primary">Voir</a>
+                        </li>
+                    {% empty %}
+                        <li class="list-group-item">Aucune activité récente.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card shadow-sm p-3">
+                <h5>Accès rapides</h5>
+                <div class="d-grid gap-2 mt-3">
+                    <a href="{% url 'cultures:liste' %}" class="btn btn-outline-success">Gérer les cultures</a>
+                    <a href="/admin/" class="btn btn-outline-secondary">Administration Django</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
