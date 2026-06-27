@@ -67,7 +67,8 @@ class Agriculteur(Utilisateur):
         Retourne les recommandations
         destinées à l'agriculteur.
         """
-        pass
+        from services.recommandation_service import RecommendationService
+        return RecommendationService.obtenir_recommandations_agriculteur(self)
 
 
 class Agronome(Utilisateur):

@@ -28,6 +28,7 @@ urlpatterns = [
     path("cultures/", include("cultures.urls")),
     path("observations/", include("observations.urls")),
     path("predictions/", include("predictions.urls")),
+    path("recommandations/", include("recommandations.urls")),
 ]
 
 if settings.DEBUG:

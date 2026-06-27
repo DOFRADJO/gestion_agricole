@@ -1,0 +1,44 @@
+{% extends "base/base.html" %}
+
+{% block title %}Historique des recommandations{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    {% include "components/breadcrumb.html" with section="Recommandations" title="Historique des recommandations" %}
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Culture</th>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Contenu</th>
+                            <th class="text-end">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for recommandation in historique %}
+                            <tr>
+                                <td>{{ recommandation.culture.nom }}</td>
+                                <td>{{ recommandation.dateRecommandation|date:"d/m/Y" }}</td>
+                                <td>{{ recommandation.type }}</td>
+                                <td>{{ recommandation.contenu|truncatechars:80 }}</td>
+                                <td class="text-end">
+                                    <a href="{% url 'recommandations:detail' recommandation.pk %}" class="btn btn-sm btn-outline-primary">Voir</a>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="5" class="text-center py-4">Aucun historique de recommandation disponible.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

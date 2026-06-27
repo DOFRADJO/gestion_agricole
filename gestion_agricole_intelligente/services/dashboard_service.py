@@ -4,6 +4,7 @@ from utilisateurs.models import Utilisateur, Agriculteur, Agronome
 from cultures.models import Culture
 from observations.models import Observation
 from predictions.models import Prediction
+from recommandations.models import Recommandation
 
 
 class DashboardService:
@@ -67,7 +68,7 @@ class DashboardService:
             },
             {
                 "label": "Recommandations",
-                "value": 0,
+                "value": Recommandation.objects.count(),
                 "icon": "bi-lightbulb",
                 "variant": "danger",
             },
@@ -121,6 +122,12 @@ class DashboardService:
                 "icon": "bi-bar-chart-line",
                 "variant": "warning",
             },
+            {
+                "label": "Recommandations",
+                "value": Recommandation.objects.count(),
+                "icon": "bi-lightbulb",
+                "variant": "danger",
+            },
         ]
         activites_recents = [
             {
@@ -133,6 +140,7 @@ class DashboardService:
         quick_actions = [
             {"label": "Explorer les cultures", "url": "/cultures/", "icon": "bi-seedling"},
             {"label": "Voir les prédictions", "url": "/predictions/", "icon": "bi-bar-chart-line"},
+            {"label": "Consulter les recommandations", "url": "/recommandations/", "icon": "bi-lightbulb"},
         ]
 
         return {
@@ -161,7 +169,7 @@ class DashboardService:
             },
             {
                 "label": "Recommandations",
-                "value": 0,
+                "value": Recommandation.objects.filter(culture__agriculteur=utilisateur.agriculteur).count(),
                 "icon": "bi-lightbulb",
                 "variant": "success",
             },
@@ -178,6 +186,7 @@ class DashboardService:
             {"label": "Ajouter une culture", "url": "/cultures/ajouter/", "icon": "bi-plus-lg"},
             {"label": "Voir mes cultures", "url": "/cultures/", "icon": "bi-list-ul"},
             {"label": "Voir mes prédictions", "url": "/predictions/", "icon": "bi-bar-chart-line"},
+            {"label": "Voir mes recommandations", "url": "/recommandations/", "icon": "bi-lightbulb"},
         ]
 
         return {

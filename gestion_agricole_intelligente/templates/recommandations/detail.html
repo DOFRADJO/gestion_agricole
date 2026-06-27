@@ -1,0 +1,33 @@
+{% extends "base/base.html" %}
+
+{% block title %}Détail de la recommandation{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    {% include "components/breadcrumb.html" with section="Recommandations" title="Détail de la recommandation" %}
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="mb-3">{{ recommandation.culture.nom }}</h5>
+                    <p class="text-muted mb-4">Culture de {{ recommandation.culture.agriculteur.get_full_name }} — {{ recommandation.culture.localisation }}</p>
+
+                    <dl class="row">
+                        <dt class="col-sm-4">Date de recommandation</dt>
+                        <dd class="col-sm-8">{{ recommandation.dateRecommandation|date:"d/m/Y" }}</dd>
+
+                        <dt class="col-sm-4">Type</dt>
+                        <dd class="col-sm-8">{{ recommandation.type }}</dd>
+
+                        <dt class="col-sm-4">Contenu</dt>
+                        <dd class="col-sm-8">{{ recommandation.contenu }}</dd>
+                    </dl>
+
+                    <a href="{% url 'recommandations:historique' %}" class="btn btn-outline-secondary">Voir l'historique des recommandations</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
