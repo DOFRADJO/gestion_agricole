@@ -64,7 +64,11 @@ class Culture(models.Model):
         if self.superficie <= 0:
             raise ValidationError({"superficie": "La superficie doit être supérieure à zéro."})
 
-        if self.date_semis and self.date_semis > date.today():
+        semis = self.date_semis
+        if hasattr(semis, "date"):
+            semis = semis.date()
+
+        if semis and semis > date.today():
             raise ValidationError(
                 {"date_semis": "La date de semis ne peut pas être dans le futur."}
             )
@@ -72,7 +76,12 @@ class Culture(models.Model):
     def age_en_jours(self):
         if not self.date_semis:
             return 0
-        return (date.today() - self.date_semis).days
+
+        semis = self.date_semis
+        if hasattr(semis, "date"):
+            semis = semis.date()
+
+        return (date.today() - semis).days
 
     def localisation_complete(self):
         return self.localisation.title()

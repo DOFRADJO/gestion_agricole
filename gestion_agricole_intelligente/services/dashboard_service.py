@@ -4,7 +4,6 @@ from utilisateurs.models import Utilisateur, Agriculteur, Agronome
 from cultures.models import Culture
 from observations.models import Observation
 from predictions.models import Prediction
-from services.prediction_service import PredictionService
 
 
 class DashboardService:

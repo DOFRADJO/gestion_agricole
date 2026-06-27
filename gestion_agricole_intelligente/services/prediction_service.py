@@ -82,10 +82,13 @@ class PredictionService:
         if utilisateur.get_type_utilisateur() != "agriculteur":
             raise PermissionDenied("Seul un agriculteur peut obtenir ses prédictions personnelles.")
 
-        predictions = []
-        for culture in Culture.objects.filter(agriculteur=utilisateur.agriculteur):
-            predictions.append(PredictionService.obtenir_prediction(culture))
-        return predictions
+        cultures = Culture.objects.filter(agriculteur=utilisateur.agriculteur).select_related("agriculteur")
+        for culture in cultures:
+            PredictionService.obtenir_prediction(culture)
+
+        return Prediction.objects.select_related("culture", "culture__agriculteur").filter(
+            culture__agriculteur=utilisateur.agriculteur
+        ).order_by("-datePrediction", "-id")
 
     @staticmethod
     def obtenir_predictions(utilisateur):
@@ -96,7 +99,8 @@ class PredictionService:
         if type_user == "agriculteur":
             return PredictionService.obtenir_predictions_agriculteur(utilisateur)
 
-        for culture in Culture.objects.all():
+        cultures = Culture.objects.select_related("agriculteur").all()
+        for culture in cultures:
             PredictionService.obtenir_prediction(culture)
 
         return Prediction.objects.select_related("culture", "culture__agriculteur").order_by("-datePrediction", "-id")
