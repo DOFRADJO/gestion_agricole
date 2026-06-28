@@ -13,7 +13,12 @@ Application web Django pour la gestion intelligente des cultures agricoles, dév
 - [Documentation](#documentation)
 - [Architecture](#architecture)
 
-## 💻 Installation
+## � Documentation
+
+- `docs/deployment_o2switch.md` : guide de déploiement sur o2switch.
+- `docs/pipeline.md` : pipeline GitHub Actions pour tests et packaging.
+
+## �💻 Installation
 
 ### Prérequis
 
