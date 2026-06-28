@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import Group
+from django.urls import reverse
 
 from services.utilisateur_service import UtilisateurService
 from utilisateurs.models import Administrateur, Utilisateur, Agronome, Agriculteur
@@ -148,6 +149,104 @@ class UtilisateurServiceTest(TestCase):
 
         self.assertEqual(count1, 1)
         self.assertEqual(count2, 1)
+
+
+class UtilisateurViewTest(TestCase):
+    """Tests d'interface pour la gestion des utilisateurs."""
+
+    def setUp(self):
+        self.admin = Utilisateur.objects.create_user(
+            email="admin@example.com",
+            username="admin",
+            first_name="Admin",
+            last_name="Test",
+            password="admin123",
+        )
+        UtilisateurService.creer_administrateur(self.admin)
+
+    def test_liste_utilisateurs_accessible_par_administrateur(self):
+        self.client.force_login(self.admin)
+
+        response = self.client.get(reverse("utilisateurs:liste"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Gestion des utilisateurs")
+
+    def test_liste_utilisateurs_refuse_les_non_administrateurs(self):
+        utilisateur = Utilisateur.objects.create_user(
+            email="user@example.com",
+            username="user",
+            password="password123",
+        )
+        self.client.force_login(utilisateur)
+
+        response = self.client.get(reverse("utilisateurs:liste"))
+
+        self.assertEqual(response.status_code, 403)
+
+    def test_creer_utilisateur_cree_un_utilisateur_et_un_profil(self):
+        self.client.force_login(self.admin)
+
+        response = self.client.post(
+            reverse("utilisateurs:ajouter"),
+            {
+                "email": "newuser@example.com",
+                "username": "newuser",
+                "first_name": "New",
+                "last_name": "User",
+                "type_utilisateur": "agronome",
+                "mot_de_passe": "secret123",
+                "is_active": "on",
+            },
+        )
+
+        self.assertEqual(response.status_code, 302)
+        utilisateur = Utilisateur.objects.get(email="newuser@example.com")
+        self.assertEqual(utilisateur.get_type_utilisateur(), "agronome")
+
+    def test_modifier_utilisateur_change_type_et_statut(self):
+        self.client.force_login(self.admin)
+
+        utilisateur = Utilisateur.objects.create_user(
+            email="change@example.com",
+            username="change",
+            first_name="Change",
+            last_name="User",
+            password="password123",
+        )
+        UtilisateurService.creer_agriculteur(utilisateur)
+
+        response = self.client.post(
+            reverse("utilisateurs:modifier", args=[utilisateur.pk]),
+            {
+                "email": "change@example.com",
+                "username": "change",
+                "first_name": "Change",
+                "last_name": "User",
+                "type_utilisateur": "agronome",
+                "mot_de_passe": "",
+                "is_active": "on",
+            },
+        )
+
+        self.assertEqual(response.status_code, 302)
+        utilisateur.refresh_from_db()
+        self.assertEqual(utilisateur.get_type_utilisateur(), "agronome")
+        self.assertTrue(utilisateur.is_active)
+
+    def test_supprimer_utilisateur_supprime_le_compte(self):
+        self.client.force_login(self.admin)
+
+        utilisateur = Utilisateur.objects.create_user(
+            email="delete@example.com",
+            username="delete",
+            password="password123",
+        )
+
+        response = self.client.post(reverse("utilisateurs:supprimer", args=[utilisateur.pk]))
+
+        self.assertEqual(response.status_code, 302)
+        self.assertFalse(Utilisateur.objects.filter(pk=utilisateur.pk).exists())
 
 
 class UtilisateurModelTest(TestCase):

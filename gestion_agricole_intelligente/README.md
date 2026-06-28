@@ -10,6 +10,7 @@ Application web Django pour la gestion intelligente des cultures agricoles, dév
 - [Initialisation](#initialisation)
 - [Authentification](#authentification)
 - [Tests](#tests)
+- [Documentation](#documentation)
 - [Architecture](#architecture)
 
 ## 💻 Installation
@@ -131,6 +132,61 @@ L'application est accessible à : `http://127.0.0.1:8000`
 - **Agronome** : Accès à la gestion des cultures et observations
 - **Agriculteur** : Accès aux cultures, prédictions et recommandations
 
+## 🧑‍💼 Gestion des utilisateurs par l'administrateur
+
+L'administrateur peut gérer les comptes utilisateurs directement depuis l'interface, sans changer la base de données ni le schéma existant.
+
+Fonctionnalités prises en charge :
+
+- Liste des utilisateurs avec recherche, filtre par type et statut
+- Création d'un compte avec type de profil et statut actif/inactif
+- Modification d'un compte, du type utilisateur et du mot de passe
+- Suppression sécurisée avec confirmation
+- Protection des routes : seul l'administrateur y accède
+- Empêchement de la suppression ou de la désactivation du compte administrateur connecté
+
+### URL de gestion des utilisateurs
+
+- `/utilisateurs/` : liste des comptes
+- `/utilisateurs/ajouter/` : création d'un compte
+- `/utilisateurs/modifier/<id>/` : modification d'un compte
+- `/utilisateurs/supprimer/<id>/` : suppression d'un compte
+
+### Exemple d'utilisation
+
+1. Connectez-vous en tant qu'administrateur.
+2. Ouvrez le menu `Utilisateurs`.
+3. Créez, modifiez ou supprimez des comptes.
+4. Utilisez les filtres pour rechercher par e-mail, type ou statut.
+
+### Implémentation technique
+
+- La logique métier est centralisée dans `services/utilisateur_service.py`
+- Les formulaires sont définis dans `utilisateurs/forms.py`
+- Les vues d'administration sont dans `utilisateurs/views.py`
+- Les templates sont dans `templates/utilisateurs/`
+
+### Créer un utilisateur depuis la console
+
+```bash
+python manage.py shell
+```
+
+```python
+from utilisateurs.models import Utilisateur
+from services.utilisateur_service import UtilisateurService
+
+utilisateur = Utilisateur.objects.create_user(
+    email="nouveau@example.com",
+    username="nouveau",
+    first_name="Nouvel",
+    last_name="Utilisateur",
+    password="motdepasse123"
+)
+
+UtilisateurService.creer_agronome(utilisateur)
+```
+
 ### Créer d'autres utilisateurs
 
 ```bash
@@ -251,7 +307,21 @@ coverage report
 coverage html
 ```
 
-## 📁 Architecture
+## � Documentation
+
+Les documents de conception et d'implémentation sont disponibles dans le dossier `docs/`.
+
+- `docs/utilisateurs.md` : gestion des utilisateurs par l'administrateur (CU6)
+- `docs/services.md` : principes et architecture des services
+- `docs/architecture.md` : architecture globale du projet
+- `docs/authentication.md` : flux d'authentification
+- `docs/cultures.md` : fonctionnement du module cultures
+- `docs/observations.md` : fonctionnement du module observations
+- `docs/predictions.md` : fonctionnement du module prédictions
+- `docs/recommandations.md` : fonctionnement du module recommandations
+- `docs/tests.md` : guide des tests
+
+## �📁 Architecture
 
 ### Structure du projet
 

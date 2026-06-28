@@ -61,6 +61,12 @@
             </li>
             {% if user_type == 'administrateur' %}
             <li class="nav-item mb-1">
+                <a class="nav-link d-flex align-items-center" href="{% url 'utilisateurs:liste' %}" title="Utilisateurs" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <span class="nav-link-icon"><i class="bi bi-people"></i></span>
+                    <span class="nav-link-text">Utilisateurs</span>
+                </a>
+            </li>
+            <li class="nav-item mb-1">
                 <a class="nav-link d-flex align-items-center" href="/admin/" title="Administration" data-bs-toggle="tooltip" data-bs-placement="right">
                     <span class="nav-link-icon"><i class="bi bi-gear"></i></span>
                     <span class="nav-link-text">Administration</span>

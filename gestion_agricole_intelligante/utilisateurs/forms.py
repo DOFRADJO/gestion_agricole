@@ -1,3 +1,9 @@
+"""Formulaire d'administration pour la gestion des utilisateurs.
+
+Ce formulaire est utilisé par les vues d'administration pour créer et modifier
+les comptes utilisateurs en ajoutant le type de profil et le mot de passe.
+"""
+
 from django import forms
 from django.core.exceptions import ValidationError
 
@@ -13,6 +19,8 @@ USER_TYPE_CHOICES = [
 
 
 class UtilisateurForm(forms.ModelForm):
+    """Formulaire de création et de modification d'un compte utilisateur."""
+
     type_utilisateur = forms.ChoiceField(
         choices=USER_TYPE_CHOICES,
         required=False,
@@ -71,6 +79,7 @@ class UtilisateurForm(forms.ModelForm):
             self.fields["mot_de_passe"].required = True
 
     def clean_email(self):
+        """Valide l'unicité de l'adresse e-mail parmi les utilisateurs."""
         email = self.cleaned_data.get("email")
         if not email:
             raise ValidationError("L'adresse e-mail est obligatoire.")
@@ -85,6 +94,7 @@ class UtilisateurForm(forms.ModelForm):
         return email
 
     def clean_mot_de_passe(self):
+        """Valide le mot de passe lors de la création d'un nouvel utilisateur."""
         mot_de_passe = self.cleaned_data.get("mot_de_passe")
         if not self.instance.pk and not mot_de_passe:
             raise ValidationError("Le mot de passe est obligatoire pour la création d'un utilisateur.")

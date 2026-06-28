@@ -25,6 +25,7 @@ urlpatterns = [
 
     path("", include("authentication.urls")),
     path("", include("core.urls")),
+    path("utilisateurs/", include("utilisateurs.urls")),
     path("cultures/", include("cultures.urls")),
     path("observations/", include("observations.urls")),
     path("predictions/", include("predictions.urls")),

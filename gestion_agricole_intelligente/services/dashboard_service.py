@@ -83,6 +83,7 @@ class DashboardService:
         ]
         quick_actions = [
             {"label": "Voir toutes les cultures", "url": "/cultures/", "icon": "bi-seedling"},
+            {"label": "Gérer les utilisateurs", "url": "/utilisateurs/", "icon": "bi-people"},
             {"label": "Explorer les prédictions", "url": "/predictions/", "icon": "bi-bar-chart-line"},
             {"label": "Accéder à l'administration", "url": "/admin/", "icon": "bi-gear"},
         ]
